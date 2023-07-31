@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="登入 | 中研院中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="../images/ogImg.jpg" />
+    <meta property="og:description" content="中研院中文口語語料庫檢索系統" />
+    <meta name="description" content="中研院中文口語語料庫檢索系統" />
+    <title>登入 | 中研院中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+<body class="page d-flex flex-column h-100">
+    <header class="navbar navbar-light navbar-expand-lg sticky-top py-0 px-3">
+        <a class="navbar-brand logo position-relative" href="/index" data-lang="">
+            <img src="{% static 'images/logo-s.png' %}" alt="中研院中文口語語料庫檢索系統" height="70">
+        </a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">中研院中文口語語料庫檢索系統</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          簡介
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item" href="/corpus_list_ch">語料庫</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_ch">語料處理</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_ch">授權資訊</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_ch{% else %}/signin_ch{% endif %}">語料檢索</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_ch{% else %}/signin_ch{% endif %}">學術資源</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_ch">系統說明</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_ch">權利宣告</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/signin_en">English</a>
+                    </li>
+                </ul>
+                <!-- account nav -->
+                {% if has_session %}
+                <ul class="navbar-nav flex-grow-1 nav-account">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_ch">帳號</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                    </li>
+                </ul> 
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <main class="container p-0 px-2 bg-white bg-opacity-75">
+        <div class="row gx-3 gy-2">
+            <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
+                <div class="position-relative my-3">
+                    <h1 class="title"><span class="px-3">登入系統</span></h1>
+                </div>
+
+                <div class="font-sizing d-block text-end py-2">
+                    <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0)">小</button>
+                    <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1)">中</button>
+                    <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2)">大</button>
+                </div>
+                
+                <div class="container form-signin py-4 mb-4">
+                    <div class="row">
+                        <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3">
+                            <div>
+                                <div class="form-floating pb-3">
+                                    <input type="email" class="form-control" id="account">
+                                    <label for="account">帳號</label>
+                                </div>
+                                <div class="form-floating pb-3">
+                                    <input type="password" class="form-control" id="password">
+                                    <label for="password">密碼</label>
+                                </div>
+                                <button class="w-100 btn btn-lg btn-primary" onclick="login()">登入</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 d-flex align-items-center">
+                            <a href="/apply_ch" class="w-50 btn btn-outline-primary m-3 flex-grow-1">新申請</a>
+                            <a href="/forgotpw_ch" class="w-50 btn btn-outline-primary m-3 flex-grow-1">忘記密碼</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content pb-5 mb-5">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card my-2">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>中研院中文對話語音語料庫<br>Sinica Taiwan Mandarin Conversational Corpus</strong></h5>
+                                    <p class="card-text">「中研院中文對話語音語料庫（TMC語料庫）」為43小時的中文對話語音資料，包含30個自由對話（MCDC8和MCDC22）、29個特定主題對話和26個地圖任務對話（MTCC和MMTC）。每個對話的平均時長分別為1小時、20分鐘及10分鐘。</p>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <a href="/corpus1_ch" class="btn btn-primary btn-sm">瞭解更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card my-2">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>中研院台灣華語社會語音語料庫<br>
+                                    Sinica Sociophonetic Corpus</strong></h5>
+                                    <p class="card-text">「中研院台灣華語社會語音語料庫」為國家型數位典藏計畫資助之計畫成果。此語料庫記錄台灣華的當代口語使用情況。錄音遍及北、中、南十二個地區，包括宜蘭縣、桃園縣、新竹縣、台中市、南投縣、雲林縣、嘉義市、彰化縣、台南市、高雄市、高雄縣、 和台北市。</p>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <a href="/corpus2_ch" class="btn btn-primary btn-sm">瞭解更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card my-2">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>中研院兒童語音語料庫
+                                    <br>Sinica Child Speech Corpus</strong></h5>
+                                    <p class="card-text">「中研院兒童語音語料庫」由國家科學及技術委員會和雅文兒童聽語文教基金會資助完成。包含79名2~6歲聽力正常(NH)的學齡前兒童和45名3~12歲聽力受損(HI)兒童的複誦和口述語音語料。</p>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <a href="/corpus3_ch" class="btn btn-primary btn-sm">瞭解更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <p class="text-center text-white my-md-2 my-1">Copyright &copy; 中央研究院語言學研究所 Institute of Linguistics, Academia Sinica.</p>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

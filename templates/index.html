@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
+    <meta property="og:description" content="中研院中文口語語料庫檢索系統" />
+    <meta name="description" content="中研院中文口語語料庫檢索系統" />
+    <title>中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <h1>中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</h1>
+            <div class="container menu text-center fadein">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a class="nav-link col mx-2" href="/corpus_list_ch" title="中文">中文</a>
+                            <a class="nav-link col mx-2" href="/corpus_list_en" title="English">English</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="fixed-bottom px-lg-5 px-2">
+            <p class="text-center text-white my-1">Copyright &copy; 中央研究院語言學研究所 Institute of Linguistics, Academia Sinica.</p>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

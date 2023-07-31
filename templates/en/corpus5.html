@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Sinica Child Speech Corpus | ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
+    <meta property="og:description" content="ILAS Chinese Spoken Language Resources System" />
+    <meta name="description" content="ILAS Chinese Spoken Language Resources System" />
+    <title>Sinica Child Speech Corpus | ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+<body class="page d-flex flex-column h-100">
+    <header class="navbar navbar-light navbar-expand-lg sticky-top py-0 px-3">
+        <a class="navbar-brand logo position-relative" href="../index.html" data-lang="">
+            <img src="{% static 'images/logo-s.png' %}" alt="ILAS Chinese Spoken Language Resources System" height="70">
+        </a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ILAS Chinese Spoken Language Resources System</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1 active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Home
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_en{% else %}/signin_en{% endif %}">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_en{% else %}/signin_en{% endif %}">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_en">Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_en">Copyright</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/corpus5_ch">中文</a>
+                    </li>
+                </ul>
+                <!-- account nav -->
+                {% if has_session %}
+                <ul class="navbar-nav flex-grow-1 nav-account">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                    </li>
+                </ul> 
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container p-0 px-2 bg-white bg-opacity-75">
+        <div class="row gx-3 gy-2">
+            <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
+                <div class="position-relative my-3">
+                    <h1 class="title"><span class="px-3">Sinica Child Speech Corpus</span></h1>
+                </div>
+
+                <div class="font-sizing d-block text-end pb-2">
+                    <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0)">S</button>
+                    <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1)">M</button>
+                    <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2)">L</button>
+                </div>
+                
+                <div class="content pb-5 mb-5">
+                    <p>中研院語料庫ＷＷＷ版所有功能均開放使用，但為防主機資源耗用過劇及顧及資料傳輸之實際限制，暫以檢索結果為限制的條件：院內檢索限兩萬行資料，院外檢索限兩千行資料。</p>
+                    <img src="../images/chara.png" alt="">
+                    <p><br></p>
+                    <h5 class="text-center">附錄二：特徵標記表</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">特徵標記</th>
+                                    <th scope="col">標記定義</th>
+                                    <th scope="col">例子</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>+attr</td>
+                                    <td>偏正詞語（aspect）</td>
+                                    <td>如：東風(NA2)[+attr]</td>
+                                </tr>
+                                <tr>
+                                    <td>+co</td>
+                                    <td>並列詞語</td>
+                                    <td>如：公卿(NA1)[+co]</td>
+                                </tr>
+                                <tr>
+                                    <td>+poly</td>
+                                    <td>複音詞語</td>
+                                    <td>如：蹻然(VI)[+poly]、熙熙(VI)[+poly]</td>
+                                </tr>
+                                <tr>
+                                    <td>+prop</td>
+                                    <td>含專名的詞語</td>
+                                    <td>如：鴻範(NB2)[+prop]</td>
+                                </tr>
+                                <tr>
+                                    <td>+rd</td>
+                                    <td>連綿詞</td>
+                                    <td>如：蒼庚(NA1)[+rd]、螳蜋(NA1)[+rd]</td>
+                                </tr>
+                                <tr>
+                                    <td>+others</td>
+                                    <td>其他詞語</td>
+                                    <td>如：鞀鞞鼓(NA2)[+others]</td>
+                                </tr>
+                                <tr>
+                                    <td>+nv</td>
+                                    <td>名謂語</td>
+                                    <td>如：民殃(VH1)[+nv]於</td>
+                                </tr>
+                                <tr>
+                                    <td>+p1</td>
+                                    <td>合併中插-前</td>
+                                    <td>如：叫不(Dc)[+vrd]醒</td>
+                                </tr>
+                                <tr>
+                                    <td>+p2</td>
+                                    <td>合併中插-後</td>
+                                    <td>如：共明弓矢(NA2)[+p2]</td>
+                                </tr>
+                                <tr>
+                                    <td>+jj</td>
+                                    <td>假借字</td>
+                                    <td>如：公用享(VH1)[+jj]于天子</td>
+                                </tr>
+                                <tr>
+                                    <td>+on</td>
+                                    <td>其他詞類作名詞</td>
+                                    <td>如：君其將以為戮(NA1)[+on]</td>
+                                </tr>
+                            <tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <p class="text-center text-white my-md-2 my-1">Copyright &copy; Institute of Linguistics, Academia Sinica.</p>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+</body>
+</html>

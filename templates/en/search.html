@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Search | ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
+    <meta property="og:description" content="ILAS Chinese Spoken Language Resources System" />
+    <meta name="description" content="ILAS Chinese Spoken Language Resources System" />
+    <title>Search | ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+    <link href="{% static 'css/search.css' %}" rel="stylesheet">
+</head>
+<body class="page d-flex flex-column h-100">
+    <header class="navbar navbar-light navbar-expand-lg sticky-top py-0 px-3">
+        <a class="navbar-brand logo position-relative" href="../index.html" data-lang="">
+            <img src="{% static 'images/logo-s.png' %}" alt="ILAS Chinese Spoken Language Resources System" height="70">
+        </a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ILAS Chinese Spoken Language Resources System</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Home
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1 active" href="{% if 'login' in request.session %}/search_en{% else %}/signin_en{% endif %}">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_en{% else %}/signin_en{% endif %}">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_en">Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_en">Copyright</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/search_ch">中文</a>
+                    </li>
+                </ul>
+                <!-- account nav -->
+                {% if has_session %}
+                <ul class="navbar-nav flex-grow-1 nav-account">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                    </li>
+                </ul> 
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container p-0 px-2 bg-white bg-opacity-75">
+        <div class="row gx-3 gy-2">
+            <button id="btnSideSearch" type="button" class="btn lh-sm" data-bs-toggle="offcanvas" data-bs-target="#sidebarSearch" aria-controls="sidebarSearch">
+                <i class="bi bi-hand-index-thumb-fill px-2"></i>Search Scope
+            </button>
+            <div id="sidebarSearch" class="offcanvas offcanvas-start m-0 literature" data-bs-backdrop="true" tabindex="-1" id="sidebarSearch" aria-labelledby="literatureArea">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-primary pt-3 pb-2" id="literatureArea">Search Scope</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+ 
+                </div>
+                <div class="offcanvas-footer p-3">
+                    <div class="row align-items-center0">
+                        <div class="font-sizing col-8 text-start">
+                            <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0, '.literature')">S</button>
+                            <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1, '.literature')">M</button>
+                            <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2, '.literature')">L</button>
+                        </div>
+                        <div class="col-4 text-end">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
+                <div class="position-relative my-3">
+                    <h1 class="title"><span class="px-3">Search</span></h1>
+                </div>
+
+                <div class="font-sizing d-block text-end pb-2">
+                    <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0)">S</button>
+                    <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1)">M</button>
+                    <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2)">L</button>
+                </div>
+                
+                <div id="searchArea" class="card mb-3 accordion">
+                    <div class="card-header accordion-header p-0">
+                        <button class="accordion-button bg-primary text-white py-2 fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearch" aria-expanded="true" aria-controls="collapseSearch">
+                            <strong>Search Scope Setting</strong>
+                        </button>
+                    </div>
+                    <div id="collapseSearch" class="card-body p-2 accordion-collapse collapse show">
+                        <form>
+                            <div class="p-0 col-12 d-block text-center table-rows table-rows--search">
+                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 w-100">
+                                    <div class="table-cell d-table-cell" data-title="&nbsp;">&nbsp;</div>
+                                    <div class="table-cell d-table-cell text-main" data-title="Character/Pinyin">
+                                        <input type="text" class="form-control text-main-character" autocomplete="off" value="">
+                                    </div>
+                                    <div class="table-cell d-table-cell text-sub text-sub-speech" data-title="詞類">
+                                        <select class="form-select text-speech" autocomplete="off" disabled>
+                                            <option></option>
+                                            <option value="A">A（nonpredicative adjective）</option>
+                                            <option value="D">D（adverb）</option>
+                                            <option value="Da">Da（quantitative adverb）</option>
+                                            <option value="Dfa">Dfa（preverbal adverb of degree）</option>
+                                            <option value="Dfb">Dfb（postverbal adverb of degree）</option>
+                                            <option value="Dk">Dk（sentential adverb）</option>
+                                            <option value="Di">Di（aspectual adverb）</option>
+                                            <option value="Caa">Caa（coordinate conjunction）</option>
+                                            <option value="Cbb">Cbb（correlative conjunction）</option>
+                                            <option value="Nep">Nep（demonstrative determinative）</option>
+                                            <option value="Neqa">Neqa（quantitative determinative）</option>
+                                            <option value="Nes">Nes（specific determinative）</option>
+                                            <option value="Neu">Neu（numeral determinative）</option>
+                                            <option value="FW">FW（foreign word）</option>
+                                            <option value="Nf">Nf（measure）</option>
+                                            <option value="Na">Na（common noun）</option>
+                                            <option value="Nb">Nb（proper noun）</option>
+                                            <option value="Nc">Nc（place noun）</option>
+                                            <option value="Ncd">Ncd（localizer）</option>
+                                            <option value="Nd">Nd（time noun）</option>
+                                            <option value="Nh">Nh（pronoun）</option>
+                                            <option value="P">P（preposition）</option>
+                                            <option value="Cab">Cab（conjunction）</option>
+                                            <option value="Cba">Cba（conjunction）</option>
+                                            <option value="Neqb">Neqb（postquantitative determinative）</option>
+                                            <option value="Ng">Ng（postposition）</option>
+                                            <option value="DE">DE（structural particle）</option>
+                                            <option value="I">I（interjection）</option>
+                                            <option value="T">T（particle）</option>
+                                            <option value="VA">VA（active intransitive verb）</option>
+                                            <option value="VB">VB（active pseudotransitive verb）</option>
+                                            <option value="VH">VH（stative intransitive verb）</option>
+                                            <option value="VI">VI（stative pseudotransitive verb）</option>
+                                            <option value="S">S（idiom）</option>
+                                            <option value="SHI">SHI（copula）</option>
+                                            <option value="VAC">VAC（active causative verb）</option>
+                                            <option value="VC">VC（active transitive verb）</option>
+                                            <option value="VCL">VCL（active verb with a locative object）</option>
+                                            <option value="VD">VD（ditransitive verb）</option>
+                                            <option value="VE">VE（active verb with a sentential object）</option>
+                                            <option value="VF">VF（active verb with a verbal object）</option>
+                                            <option value="VG">VG（classificatory verb）</option>
+                                            <option value="VHC">VHC（stative causative verb）</option>
+                                            <option value="VJ">VJ（stative transitive verb）</option>
+                                            <option value="VK">VK（stative verb with a sentential object）</option>
+                                            <option value="VL">VL（stative verb with a verbal object）</option>
+                                            <option value="V_2">V_2（you）</option>
+                                        </select>
+                                    </div>
+                                    <div class="table-cell d-table-cell form-features" data-title="&nbsp;">
+                                        <a href="javascript:void(0);" onclick="conditionChange(2, this)"><i class="bi bi-plus-circle-fill fs-3"></i></a>
+                                    </div>
+                                </div>
+                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 w-100 form-pos">
+                                    <div class="table-cell d-table-cell" data-title="&nbsp;">&nbsp;</div>
+                                    <div class="table-cell d-table-cell text-start text-adjacent" data-title="&nbsp;">
+                                        <label class="d-flex align-items-center"><input type="radio" name="character0" class="form-check-input m-1" autocomplete="off" value="1"> IPU-internal (同一語者)</label>
+                                        <label class="d-flex align-items-center"><input type="radio" name="character0" class="form-check-input m-1" autocomplete="off" value="2"> N-character interval <input type="text" class="form-control d-inline-block text-center mx-1 text-n-character" autocomplete="off" value="" disabled> 字內 (同一語者)</label>
+                                        <label class="d-flex align-items-center"><input type="radio" name="character0" class="form-check-input m-1" autocomplete="off" value="3"> N-character interval <input type="text" class="form-control d-inline-block text-center mx-1 text-n-character" autocomplete="off" value="" disabled> 字內 (跨語者)</label>
+                                    </div>
+                                    <div class="table-cell d-table-cell" data-title="&nbsp;">&nbsp;</div>
+                                </div>
+                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 table-rows--body-sub w-100">
+                                    <div class="table-cell d-table-cell" data-title="&nbsp;">
+                                        <select class="form-select" autocomplete="off">
+                                            <option value="and">AND</option>
+                                            <option value="or">OR</option>
+                                            <option value="not">NOT</option>
+                                        </select>
+                                    </div>
+                                    <div class="table-cell d-table-cell text-main" data-title="Character/Pinyin">
+                                        <input type="text" class="form-control text-main-character" autocomplete="off" value="">
+                                    </div>
+                                    <div class="table-cell d-table-cell text-sub text-sub-speech" data-title="詞類">
+                                        <select class="form-select text-speech" autocomplete="off" disabled>
+                                            <option></option>
+                                            <option value="A">A（nonpredicative adjective）</option>
+                                            <option value="D">D（adverb）</option>
+                                            <option value="Da">Da（quantitative adverb）</option>
+                                            <option value="Dfa">Dfa（preverbal adverb of degree）</option>
+                                            <option value="Dfb">Dfb（postverbal adverb of degree）</option>
+                                            <option value="Dk">Dk（sentential adverb）</option>
+                                            <option value="Di">Di（aspectual adverb）</option>
+                                            <option value="Caa">Caa（coordinate conjunction）</option>
+                                            <option value="Cbb">Cbb（correlative conjunction）</option>
+                                            <option value="Nep">Nep（demonstrative determinative）</option>
+                                            <option value="Neqa">Neqa（quantitative determinative）</option>
+                                            <option value="Nes">Nes（specific determinative）</option>
+                                            <option value="Neu">Neu（numeral determinative）</option>
+                                            <option value="FW">FW（foreign word）</option>
+                                            <option value="Nf">Nf（measure）</option>
+                                            <option value="Na">Na（common noun）</option>
+                                            <option value="Nb">Nb（proper noun）</option>
+                                            <option value="Nc">Nc（place noun）</option>
+                                            <option value="Ncd">Ncd（localizer）</option>
+                                            <option value="Nd">Nd（time noun）</option>
+                                            <option value="Nh">Nh（pronoun）</option>
+                                            <option value="P">P（preposition）</option>
+                                            <option value="Cab">Cab（conjunction）</option>
+                                            <option value="Cba">Cba（conjunction）</option>
+                                            <option value="Neqb">Neqb（postquantitative determinative）</option>
+                                            <option value="Ng">Ng（postposition）</option>
+                                            <option value="DE">DE（structural particle）</option>
+                                            <option value="I">I（interjection）</option>
+                                            <option value="T">T（particle）</option>
+                                            <option value="VA">VA（active intransitive verb）</option>
+                                            <option value="VB">VB（active pseudotransitive verb）</option>
+                                            <option value="VH">VH（stative intransitive verb）</option>
+                                            <option value="VI">VI（stative pseudotransitive verb）</option>
+                                            <option value="S">S（idiom）</option>
+                                            <option value="SHI">SHI（copula）</option>
+                                            <option value="VAC">VAC（active causative verb）</option>
+                                            <option value="VC">VC（active transitive verb）</option>
+                                            <option value="VCL">VCL（active verb with a locative object）</option>
+                                            <option value="VD">VD（ditransitive verb）</option>
+                                            <option value="VE">VE（active verb with a sentential object）</option>
+                                            <option value="VF">VF（active verb with a verbal object）</option>
+                                            <option value="VG">VG（classificatory verb）</option>
+                                            <option value="VHC">VHC（stative causative verb）</option>
+                                            <option value="VJ">VJ（stative transitive verb）</option>
+                                            <option value="VK">VK（stative verb with a sentential object）</option>
+                                            <option value="VL">VL（stative verb with a verbal object）</option>
+                                            <option value="V_2">V_2（you）</option>
+                                        </select>
+                                    </div>
+                                    <div class="table-cell d-table-cell form-features" data-title="&nbsp;">
+                                        <a href="javascript:void(0);" onclick="conditionChange(1, this)"><i class="bi bi-dash-circle-fill fs-3"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent p-2 fs-6">
+                            <div class="col-12 d-flex justify-content-center py-2">
+                                <button class="btn btn-primary px-4 mx-3" type="reset">Clear</button>
+                                <button class="btn btn-primary px-4 mx-3" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- 搜尋條件樣版 -->
+                    <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 search-condition-tmpl d-lg-none d-none table-rows--body-sub w-100">
+                        <div class="table-cell d-table-cell" data-title="&nbsp;">
+                            <select class="form-select" autocomplete="off">
+                                <option value="and">AND</option>
+                                <option value="or">OR</option>
+                                <option value="not">NOT</option>
+                            </select>
+                        </div>
+                        <div class="table-cell d-table-cell text-main" data-title="Character/Pinyin">
+                            <input type="text" class="form-control text-main-character" autocomplete="off" value="">
+                        </div>
+                        <div class="table-cell d-table-cell text-sub text-sub-speech" data-title="詞類">
+                            <select class="form-select text-speech" autocomplete="off" disabled>
+                                <option value="A">A（nonpredicative adjective）</a>
+                                <option value="D">D（adverb）</a>
+                                <option value="Da">Da（quantitative adverb）</a>
+                                <option value="Dfa">Dfa（preverbal adverb of degree）</a>
+                                <option value="Dfb">Dfb（postverbal adverb of degree）</a>
+                                <option value="Dk">Dk（sentential adverb）</a>
+                                <option value="Di">Di（aspectual adverb）</a>
+                                <option value="Caa">Caa（coordinate conjunction）</a>
+                                <option value="Cbb">Cbb（correlative conjunction）</a>
+                                <option value="Nep">Nep（demonstrative determinative）</a>
+                                <option value="Neqa">Neqa（quantitative determinative）</a>
+                                <option value="Nes">Nes（specific determinative）</a>
+                                <option value="Neu">Neu（numeral determinative）</a>
+                                <option value="FW">FW（foreign word）</a>
+                                <option value="Nf">Nf（measure）</a>
+                                <option value="Na">Na（common noun）</a>
+                                <option value="Nb">Nb（proper noun）</a>
+                                <option value="Nc">Nc（place noun）</a>
+                                <option value="Ncd">Ncd（localizer）</a>
+                                <option value="Nd">Nd（time noun）</a>
+                                <option value="Nh">Nh（pronoun）</a>
+                                <option value="P">P（preposition）</a>
+                                <option value="Cab">Cab（conjunction）</a>
+                                <option value="Cba">Cba（conjunction）</a>
+                                <option value="Neqb">Neqb（postquantitative determinative）</a>
+                                <option value="Ng">Ng（postposition）</a>
+                                <option value="DE">DE（structural particle）</a>
+                                <option value="I">I（interjection）</a>
+                                <option value="T">T（particle）</a>
+                                <option value="VA">VA（active intransitive verb）</a>
+                                <option value="VB">VB（active pseudotransitive verb）</a>
+                                <option value="VH">VH（stative intransitive verb）</a>
+                                <option value="VI">VI（stative pseudotransitive verb）</a>
+                                <option value="S">S（idiom）</a>
+                                <option value="SHI">SHI（copula）</a>
+                                <option value="VAC">VAC（active causative verb）</a>
+                                <option value="VC">VC（active transitive verb）</a>
+                                <option value="VCL">VCL（active verb with a locative object）</a>
+                                <option value="VD">VD（ditransitive verb）</a>
+                                <option value="VE">VE（active verb with a sentential object）</a>
+                                <option value="VF">VF（active verb with a verbal object）</a>
+                                <option value="VG">VG（classificatory verb）</a>
+                                <option value="VHC">VHC（stative causative verb）</a>
+                                <option value="VJ">VJ（stative transitive verb）</a>
+                                <option value="VK">VK（stative verb with a sentential object）</a>
+                                <option value="VL">VL（stative verb with a verbal object）</a>
+                                <option value="V_2">V_2（you）</a>
+                            </select>
+                        </div>
+                        <div class="table-cell d-table-cell form-features" data-title="&nbsp;">
+                            <a href="javascript:void(0);" onclick="conditionChange(1, this)"><i class="bi bi-dash-circle-fill fs-3"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="searchScope" class="alert px-2 py-1" role="alert">
+                    <p class="m-2"><strong>找到 100 筆 / 總共 1,000 筆。</strong></p>
+                </div>
+                <div class="text-muted fs-6 mx-3 mb-3 d-flex flex-lg-row flex-column justify-content-end text-end">
+                    <div><a class="badge bg-primary text-light text-decoration-none" href="javascript:void(0);"><i class="bi bi-file-earmark-arrow-up"></i> Export</a></div>
+                </div>
+
+                <nav>
+                    <ul class="pagination flex-wrap justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div id="searchResult" class="content pb-2">
+                    <div class="mb-4 p-0 col-12 d-lg-table d-block text-center table-rows table-rows--result">
+                        <div class="table-row table-rows--header py-3 d-flex align-items-center">
+                            <div class="table-cell d-lg-table-cell d-none">SNO.</div>
+                            <div class="table-cell d-lg-table-cell d-none">出處<br>(書名/篇名)</div>
+                            <div class="table-cell d-lg-table-cell d-none">對話編號</div>
+                            <div class="table-cell d-lg-table-cell d-none text-talk">語者</div>
+                            <div class="table-cell d-lg-table-cell d-none text-start text-result">內容</div>
+                        </div>
+                        <div class="table-row table-rows--body d-flex py-1 flex-wrap align-items-start">
+                            <div class="table-cell d-table-cell" data-title="SNO."><p class="my-md-2 my-0">1</p></div>
+                            <div class="table-cell d-table-cell" data-title="語料庫名稱" title="主題語料庫"><p class="my-md-2 my-0">主題語料庫</p></div>
+                            <div class="table-cell d-table-cell" data-title="對話編號" title="Mtcc-01-01">
+				<p class="my-md-2 my-0"><a href="javascript:void(0);" class="text-keyword2" data-bs-toggle="modal" data-bs-target="#keywordModal">Mtcc-01-01</a></p></div>
+                            <div class="table-cell d-table-cell text-content">
+                                <div class="d-flex">
+                                    <div class="table-cell text-talks" data-title="語者">
+                                        <p class="my-2 text-primary"><i class="bi bi-person-fill"></i> A</p>
+                                    </div>
+                                    <div class="table-cell text-start text-results" data-title="內容">
+                                        <p class="my-2"><span class="border border-info bg-info bg-opacity-10 px-1 me-2">漢</span><button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> <span class="bg-primary text-white">這</span> 是很正常的 <span class="bg-primary text-white">啊</span> ，<button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> 在所謂的駕訓班裡，學到開車的方法在跟現實外面路上開車方法是兩碼子事。</p>
+                                        <p class="my-2"><span class="border border-success bg-success bg-opacity-10 px-1 me-2">拼</span>ZHe4 261 Nga1 kai5 lai5 tsii3 ,</p>
+                                        <p class="my-2"><span class="border border-warning bg-warning bg-opacity-10 px-1 me-2">POS</span>N V De..........</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start">
+                                    <div class="table-cell text-talks" data-title="語者">
+                                        <p class="my-2 text-primary"><i class="bi bi-person-fill"></i> B</p>
+                                    </div>
+                                    <div class="table-cell text-start text-results" data-title="內容">
+                                        <p class="my-2"><span class="border border-info bg-info bg-opacity-10 px-1 me-2">漢</span><button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> <span class="bg-primary text-white">這</span> 是很正常的 <span class="bg-primary text-white">啊</span> ，<button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> 在所謂的駕訓班裡，學到開車的方法在跟現實外面路上開車方法是兩碼子事。</p>
+                                        <p class="my-2"><span class="border border-success bg-success bg-opacity-10 px-1 me-2">拼</span>ZHe4 261 Nga1 kai5 lai5 tsii3 ,</p>
+                                        <p class="my-2"><span class="border border-warning bg-warning bg-opacity-10 px-1 me-2">POS</span>N V De..........</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-row table-rows--body d-flex py-1 flex-wrap align-items-start">
+                            <div class="table-cell d-table-cell" data-title="SNO."><p class="my-md-2 my-0">2</p></div>
+                            <div class="table-cell d-table-cell" data-title="語料庫名稱" title="主題語料庫"><p class="my-md-2 my-0">主題語料庫</p></div>
+                            <div class="table-cell d-table-cell" data-title="對話編號" title="Mtcc-01-02">
+				<p class="my-md-2 my-0"><a href="javascript:void(0);" class="text-keyword2" data-bs-toggle="modal" data-bs-target="#keywordModal">Mtcc-01-02</a></p></div>
+                            <div class="table-cell d-table-cell text-content">
+                                <div class="d-flex">
+                                    <div class="table-cell text-talks" data-title="語者">
+                                        <p class="my-2 text-primary"><i class="bi bi-person-fill"></i> A</p>
+                                    </div>
+                                    <div class="table-cell text-start text-results" data-title="內容">
+                                        <p class="my-2"><span class="border border-info bg-info bg-opacity-10 px-1 me-2">漢</span><button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> <span class="bg-primary text-white">這</span> 是很正常的 <span class="bg-primary text-white">啊</span> ，<button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> 在所謂的駕訓班裡，學到開車的方法在跟現實外面路上開車方法是兩碼子事。</p>
+                                        <p class="my-2"><span class="border border-success bg-success bg-opacity-10 px-1 me-2">拼</span> ZHe4 261 Nga1 kai5 lai5 tsii3 ,</p>
+                                        <p class="my-2"><span class="border border-warning bg-warning bg-opacity-10 px-1 me-2">POS</span> N V De..........</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="table-cell text-talks" data-title="語者">
+                                        <p class="my-2 text-primary"><i class="bi bi-person-fill"></i> A</p>
+                                    </div>
+                                    <div class="table-cell text-start text-results" data-title="內容">
+                                        <p class="my-2"><span class="border border-info bg-info bg-opacity-10 px-1 me-2">漢</span><button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> <span class="bg-primary text-white">這</span> 是很正常的 <span class="bg-primary text-white">啊</span> ，<button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> 在所謂的駕訓班裡，學到開車的方法在跟現實外面路上開車方法是兩碼子事。</p>
+                                        <p class="my-2"><span class="border border-success bg-success bg-opacity-10 px-1 me-2">拼</span> ZHe4 261 Nga1 kai5 lai5 tsii3 ,</p>
+                                        <p class="my-2"><span class="border border-warning bg-warning bg-opacity-10 px-1 me-2">POS</span> N V De..........</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start">
+                                    <div class="table-cell text-talks" data-title="語者">
+                                        <p class="my-2 text-primary"><i class="bi bi-person-fill"></i> B</p>
+                                    </div>
+                                    <div class="table-cell text-start text-results" data-title="內容">
+                                        <p class="my-2"><span class="border border-info bg-info bg-opacity-10 px-1 me-2">漢</span><button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> <span class="bg-primary text-white">這</span> 是很正常的 <span class="bg-primary text-white">啊</span> ，<button class="btnAudio" onclick="playAudio('audio001')" type="button"><i class="bi bi-volume-up-fill text-primary"></i></button> 在所謂的駕訓班裡，學到開車的方法在跟現實外面路上開車方法是兩碼子事。</p>
+                                        <p class="my-2"><span class="border border-success bg-success bg-opacity-10 px-1 me-2">拼</span>ZHe4 261 Nga1 kai5 lai5 tsii3 ,</p>
+                                        <p class="my-2"><span class="border border-warning bg-warning bg-opacity-10 px-1 me-2">POS</span>N V De..........</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="pb-4">
+                    <ul class="pagination flex-wrap justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="keywordModal" tabindex="-1" data-bs-backdrop="true" aria-labelledby="keywordModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">主題語料庫/Mtcc-01-01</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+		<br>
+            <div class="content">
+              <p>惟三月，哉生魄，周公初基作新大邑于東國洛；四方民大和會，侯、甸、男邦、采、衛，百工播民，和見士于周。周公咸勤，乃洪大誥治。王若曰：「孟侯，朕其弟，小子封。惟乃丕顯考文王，克明德慎罰，不敢侮鰥寡，庸庸、祇祇，威威、顯民。用肇造我區夏，越我一二邦，以修我西土。惟時怙，冒聞于上帝，帝休。天乃大命文王，殪戎殷，誕受厥命。越厥邦厥民。惟時憷。乃寡兄勖，肆汝小子封，在茲東土。」王曰：「嗚呼！封。汝念哉！今民將在祇遹乃文考，紹聞衣德言；往敷求于殷先哲王，用保乂民。汝丕遠惟商耇成人，宅心知訓。別求聞由古先哲王，用康保民，弘于天。若德裕乃身，不廢在王命。。王曰：「嗚呼！小子封。恫瘝乃身，敬哉！天畏棐忱，民情大可見。小人難保；往盡乃心，無康好逸豫，乃其乂民。我聞曰：『怨不在大，亦不在小；惠不惠，懋不懋。』已！汝惟小子，乃服惟弘王，應保殷民。亦惟助王宅天命，作新民。」王曰：「嗚呼！封。敬明乃罰。人有小罪非眚，乃惟終，自作不典；式爾，有厥罪小，乃不可不殺。乃有大罪非終，乃惟眚災適爾；既道極厥辜，時乃不可殺。」王曰：「嗚呼！封。有憷時，乃大明服，惟民其�懋和。若有疾，惟民其畢棄咎。若保赤子，惟民其康乂。非汝封刑人殺人，無或刑人殺人；非汝封又曰劓刵人，無或劓刵人。」王曰：「外事，汝陳時臬司，師茲殷罰有倫。」又曰：「要囚，服念五六日，至于旬時，丕蔽要囚。」王曰：「汝陳時臬事，罰蔽殷彝；用其義刑義殺，勿庸以次汝封。乃汝盡遜，曰時憷；惟曰未有遜事。已！汝惟小子，未其有若汝封之心，朕心朕德惟乃知。凡民自得罪，寇攘姦宄，殺越人于貨，暋不畏死，罔弗憝。」王曰：「封！元惡大憝，矧惟不孝不友。子弗祗服厥父事，大傷厥考心；于父不能字厥子，乃疾厥子；于弟弗念天顯，乃弗克恭厥兄；兄亦不念鞠子哀，大不友于弟。惟弔茲，不于我政人得罪，天惟與我民彝大泯亂。曰：乃其速由文王作罰，刑茲無赦。不率大戛，矧惟外庶子訓人，惟厥正人、越小臣、<span class="text-keyword">諸</span>節；乃別播敷，造民大譽；弗念弗庸，瘝厥君。時乃引惡，惟朕憝。已，乃其速由茲義率殺。亦惟君惟長，不能厥家人，越厥小臣外正；惟威惟虐，大放王命；乃非德用乂。汝亦罔不克敬典，乃由裕民；惟文王之敬忌，乃裕民。曰：『我惟有及。』則予一人以懌。」王曰：「封！爽惟民，迪吉康。我時其惟殷先哲王德，用康乂民作求。矧今民罔迪不適，不迪則罔政在厥邦。」王曰：「封！予惟不可不監，告汝德之說，于罰之行。今惟民不靜，未戾厥心，迪屢未同；爽惟天其罰殛我，我其不怨。惟厥罪無在大，亦無在多，矧曰其尚顯聞于天。」王曰：「嗚呼！封。敬哉！無作怨，勿用非謀非彝蔽時忱，丕則敏德。用康乃心，顧乃德，遠乃猷裕，乃以民寧，不汝瑕殄。」王曰：「嗚呼！肆汝小子封，惟命不于常；汝念哉！無我殄享。明乃服命，高乃聽，用康乂民。」王若曰：「往哉，封。勿替敬典；聽朕告汝，乃以殷民世享。」</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="row align-items-center w-100">
+              <div class="font-sizing col-6 text-start">
+                <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0, '.modal')">小</button>
+                <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1, '.modal')">中</button>
+                <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2, '.modal')">大</button>
+              </div>
+              <div class="col-6 text-end">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">關閉</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </main>
+    
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <p class="text-center text-white my-md-2 my-1">Copyright &copy; Institute of Linguistics, Academia Sinica.</p>
+    </footer>
+
+
+
+    
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/search.js' %}"></script>
+    <script src="{% static 'js/navigateToPage.js' %}"></script>
+</body>
+</html>

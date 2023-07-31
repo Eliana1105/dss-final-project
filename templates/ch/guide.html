@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="使用說明 | 中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
+    <meta property="og:description" content="中研院中文口語語料庫檢索系統" />
+    <meta name="description" content="中研院中文口語語料庫檢索系統" />
+    <title>使用說明 | 中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+<body class="page d-flex flex-column h-100">
+    <header class="navbar navbar-light navbar-expand-lg sticky-top py-0 px-3">
+        <a class="navbar-brand logo position-relative" href="/index" data-lang="">
+            <img src="{% static 'images/logo-s.png' %}" alt="中研院中文口語語料庫檢索系統" height="70">
+        </a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">中研院中文口語語料庫檢索系統</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          簡介
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item" href="/corpus_list_ch">語料庫</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_ch">語料處理</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_ch">授權資訊</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_ch{% else %}/signin_ch{% endif %}">語料檢索</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_ch{% else %}/signin_ch{% endif %}">學術資源</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1 active" href="/guide_ch">系統說明</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_ch">權利宣告</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_en">English</a>
+                    </li>
+                </ul>
+                <!-- account nav -->
+                {% if has_session %}
+                <ul class="navbar-nav flex-grow-1 nav-account">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_ch">帳號</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                    </li>
+                </ul> 
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    
+    <main class="container p-0 px-2 bg-white bg-opacity-75">
+        <div class="row gx-3 gy-2">
+            <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
+                <div class="position-relative my-3">
+                    <h1 class="title"><span class="px-3">系統說明</span></h1>
+                </div>
+
+                <div class="font-sizing d-block text-end pb-2">
+                    <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0)">小</button>
+                    <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1)">中</button>
+                    <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2)">大</button>
+                </div>
+                
+                <div class="pb-5 mb-5">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item col" role="presentation">
+                            <button class="nav-link border-0 fs-5 w-100 active" id="item1-tab" data-bs-toggle="tab" data-bs-target="#item1" type="button" role="tab" aria-controls="item1" aria-selected="true">檢索使用說明</button>
+                        </li>
+                        <li class="nav-item col" role="presentation">
+                            <button class="nav-link border-0 fs-5 w-100" id="item2-tab" data-bs-toggle="tab" data-bs-target="#item2" type="button" role="tab" aria-controls="item2" aria-selected="false">申請帳號說明</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-3" id="myTabContent">
+                        <div class="tab-pane fade content show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+                            <p>
+                                進入到語料檢索頁面後，
+                                可先按下頁面左手邊的「設定搜尋範圍」按鈕，
+                                側邊欄開啟後，可選擇欲檢索的文獻範圍，
+                                一次只能選擇一種主題語料庫
+                                子語料庫則可以多選
+                                按下確定後 完成搜尋範圍設定
+                            </p>
+                            <p>
+                                【現代漢語主題對話語音語料庫】<br><br>
+                                1. 設定主要的檢索目標，
+                                於第一個欄位輸入欲檢索的主要關鍵字（可輸入漢字或拼音），
+                                在輸入完成後，後方下拉選單可以選擇詞類也可以空白。<br>
+                            </p>
+                            <P>
+                                2. 選擇搜尋模式，分為<br>
+                                (1)「同一IPU內」:<br>
+                                &nbsp檢索方式將會限定在同一個IPU。<br><br>
+
+                                    (2)「前後相鄰幾字內（同一語者）」:<br>
+                                    &nbsp檢索方式為輸入的前後幾字內，限定在同一語者，沒有IPU的限制。<br><br>
+
+                                    (3)「前後相鄰幾字內（跨語者）」:<br>
+                                    &nbsp檢索方式為輸入的前後幾字內，沒有IPU的限制，也沒有同一語者的限制。<br><br>                          
+                            </P>
+                            <p>
+                                3. 設定次要的檢索目標（此非為必要，可不設定）<br>
+                                關鍵字與詞類設定方式與主要搜尋目標相同，
+                                在輸入次要關鍵字之前，
+                                需選擇與主要搜尋目標間的關係，分為<br>
+                                (1)「AND」:<br>
+                                &nbsp此選項為「和」的意思，在選擇的搜尋模式下，
+                                必須同時出現主要搜尋目標與次要搜尋目標。<br><br>
+                                (2)「OR」:<br>
+                                &nbsp此選項為「或」的意思，在選擇的搜尋模式下，
+                                除了主要搜尋目標外，只要有符合的次要搜尋目標，也會顯示。<br><br>
+                                (3)「NOT」:<br>
+                                &nbsp此選項為「沒有」的意思，在選擇的搜尋模式下，
+                                主要搜尋目標的結果中若符合次要搜尋目標，
+                                則該筆結果不顯示。<br><br>
+                            </p>
+                            <P>
+                                按下主搜尋條件右方的「+」字號，
+                                可增加次要搜尋條件。<br>
+
+                                按下次搜尋條件右方的「-」字號，
+                                可減少次要搜尋條件，
+                                最少可減至沒有，意即無次要搜尋條件。<br><br>
+
+                                按下「清除」按鍵，
+                                將會清除所有已設定的搜尋條件，
+                                恢復為還未進行任何設定的狀態。<br>
+
+                                按下「搜尋」按鍵，
+                                依據上述所有設定開始搜尋，
+                                並顯示於下方。<br><br>
+                            </P>
+                            <P>
+                                【社會語音資料庫＆兒童聽力資料】<br>
+                                除了沒有詞類設定欄位以及跨語者模式，
+                                其他與漢語主題對話語音語料庫相同。
+
+                            </P>
+                        </div>
+                        <div class="tab-pane fade content" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+                            <p>1. 進入新申請頁面，初次申請帳號，需要先下載申請書。</p>
+                            <p>2. 在簽署好之後，按下「選擇檔案」，選擇簽署好的申請書檔案，並按下「上傳檔案」。</p>
+                            <p>3. 上傳完，按下「預覽檔案」，即可以確認是否成功上傳。</p>
+                            <p>4. 確認完之後，按下「確認申請」，即完成帳號申請。</p>
+                            <P>5. 待經確認後，若無異樣，將會發送登入密碼至信箱，登入後即可開始使用本系統</P>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <p class="text-center text-white my-md-2 my-1">Copyright &copy; 中央研究院語言學研究所 Institute of Linguistics, Academia Sinica.</p>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+</body>
+</html>

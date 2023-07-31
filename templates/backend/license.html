@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <title>帳號管理|中研院中文口語語料庫檢索系統後端管理 ILAS Chinese Spoken Language Resources Management</title>
+
+    <link href="{% static 'backend/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'backend/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet">
+    <link href="{% static 'backend/css/common.css' %}" rel="stylesheet">
+
+</head>
+<body class="d-flex flex-column">
+    <header class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a href="#" class="d-flex align-items-center justify-content-center text-decoration-none px-2">
+                <img src="{% static 'backend/images/logo-s.png' %}" alt="中研院中文口語語料庫檢索系統後端管理" width="233" height="60">
+            </a>
+            <nav class="d-flex justify-content-end">
+                <ul class="nav navbar-nav flex-row me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_resource">授權資源管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_corpus">語料管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_record">日誌查詢</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/backend_account">帳號管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_manual">操作手冊</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_index">登出</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="title d-block border-bottom mb-2">
+        <h2 class="h3 py-3 m-0 text-center">授權紀錄</h2>
+    </div>
+
+    <main class="container-fluid">
+        <div class="container my-4 border-bottom">
+            <div class="row">
+                <div class="col-sm-4 py-3" id="name">
+                    姓名：張小姐
+                </div>
+                <div class="col-sm-4 py-3" id="account">
+                    帳號：ChangGirl
+                </div>
+                <div class="col-sm-4 py-3" id="institute">
+                    所屬機構：無
+                </div>
+                <div class="col-sm-4 py-3" id="email">
+                    電子郵件：張小姐
+                </div>
+                <div class="col-sm-4 py-3" id="phone">
+                    聯絡電話：03-1234567
+                </div>
+            </div>
+        </div>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12">
+                    <table id="recordTable1" class="table table-striped table-hover w-100 py-2">
+                        <thead class="table-light">
+                            <tr>
+                                <th>帳號生效日</th>
+                                <th>帳號有效期限</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <div>
+            <p class="text-center text-white my-md-2 my-1">Copyright &copy; Institute of Linguistics, Academia Sinica.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'backend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'backend/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'backend/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'backend/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'backend/js/common.js' %}"></script>
+    <script type="text/javascript">
+
+        var url = new URL(window.location.href);
+
+        var params = new URLSearchParams(url.search);
+        // 獲取指定参数的值
+        var param1 = params.get('id');
+        $.ajax({
+            url: "/backend_get_userdata/",
+            type: "POST",
+            dataType: "json",
+            data:{
+            "id":param1
+            },
+            success: function(data){
+            if (data['status']=='Yes'){
+                $('#name').html("姓名："+ data['name']) ;
+                $('#account').html("帳號："+ data['account']) ;
+                if(data['institute']){
+                    $('#institute').html("所屬機構："+ data['institute']) ;        
+                }
+                else{
+                    $('#institute').html("所屬機構：無");     
+                }
+                $('#email').html("電子郵件："+ data['email']) ;
+                if(data['phone']){
+                    $('#phone').html("聯絡電話："+ data['phone']) ;  
+                }
+                else{
+                    $('#phone').html("聯絡電話：無");      
+                }
+            }
+            else{
+                alert(data['msg']);
+            }
+            
+            }
+         });
+         $.ajax({
+        url: '/backend_get_user_license/', 
+        type: 'POST',
+        data:{
+            "id":param1
+            },
+        success: function(response) {
+            // data table
+            var table = $('#recordTable1').DataTable({
+        data: response,
+        columns: [
+            { data: 'start' },
+            { data: 'end' },
+        ],
+        order: [[1, 'desc']]
+        });
+    },
+        error: function(error) {
+            console.log(error);
+    }
+}); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="地圖導引口語語音語料庫 | 中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
+    <meta property="og:description" content="中研院中文口語語料庫檢索系統" />
+    <meta name="description" content="中研院中文口語語料庫檢索系統" />
+    <title>地圖導引口語語音語料庫 | 中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+<body class="page d-flex flex-column h-100">
+    <header class="navbar navbar-light navbar-expand-lg sticky-top py-0 px-3">
+        <a class="navbar-brand logo position-relative" href="/index" data-lang="">
+            <img src="{% static 'images/logo-s.png' %}" alt="中研院中文口語語料庫檢索系統" height="70">
+        </a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">中研院中文口語語料庫檢索系統</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1 active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          簡介
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item active" href="/corpus_list_ch">語料庫</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_ch">語料處理</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_ch">授權資訊</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_ch{% else %}/signin_ch{% endif %}">語料檢索</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_ch{% else %}/signin_ch{% endif %}">學術資源</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_ch">系統說明</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_ch">權利宣告</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/corpus3_en">English</a>
+                    </li>
+                </ul>
+                <!-- account nav -->
+                {% if has_session %}
+                <ul class="navbar-nav flex-grow-1 nav-account">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_ch">帳號</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                    </li>
+                </ul> 
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container p-0 px-2 bg-white bg-opacity-75">
+        <div class="row gx-3 gy-2">
+            <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
+                <div class="position-relative my-3">
+                    <h1 class="title"><span class="px-3">中研院兒童語音語料庫
+                        <br>Sinica Child Speech Corpus
+                        </span></h1>
+                </div>
+
+                <div class="font-sizing d-block text-end pb-2">
+                    <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0)">小</button>
+                    <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1)">中</button>
+                    <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2)">大</button>
+                </div>
+                
+                <div class="content pb-5 mb-5">
+                    <p>「中研院兒童語音語料庫」由國家科學及技術委員會和雅文兒童聽語文教基金會資助完成。包含79名2~6歲聽力正常(NH)的學齡前兒童和45名3~12歲聽力受損(HI)兒童的複誦和口述語音語料。HI兒童其中30名佩戴傳統助聽器（輕度至重度聽力損失）；15名使用人工耳蝸（重度至重度聽力損失）。HI兒童錄音 使用雅文兒童聽語文教基金會隔音教室內建的錄影設備錄製。NH兒童在中央研究院語言學研究所的隔音錄音間或幼兒園安靜的教室中使用Sony Hi-MD MZ-RH1數位錄音機和Sony ECM MS907麥克風進行錄音。口述語音語料以說故事方式進行，錄音時以《龜兔賽跑》固定順序的圖卡誘導兒童口述故事內容。內容以繁體中文轉寫。語料庫的統計數據如下。</p>
+                    <img src="../images/chara.png" alt="">
+                    <p><br></p>
+                    <h5 class="text-center">表：中研院中文對話語音語料庫統計數據</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="text-align: center;">項目</th>
+                                    <th scope="col">描述</th>
+                                    <th scope="col">HI</th>
+                                    <th scope="col">NH</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;">IPU</td>
+                                    <td></td>
+                                    <td>2,208</td>
+                                    <td>2,727</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="9" style="vertical-align: middle;text-align: center;">Word</td>
+                                    <td>Lexical words</td>
+                                    <td>5,193(503)</td>
+                                    <td>6,436(559)</td>
+                                </tr>
+                                <tr>
+                                    <td>1-syllabic words</td>
+                                    <td>3,002(181)</td>
+                                    <td>3,863(205)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>2-syllabic words</td>
+                                    <td>2,123(276)</td>
+                                    <td>2,484(305)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>3-syllabic words</td>  
+                                    <td>61(40)</td>
+                                    <td>86(46)</td>                                 
+                                </tr>
+                                <tr>
+                                    <td>Others</td>  
+                                    <td>7(6)</td>
+                                    <td>3(3)</td>                                 
+                                </tr>
+                                <tr>
+                                    <td>Discourse-related items</td>  
+                                    <td>2,778(42)</td>
+                                    <td>3,695(51)</td>                                 
+                                </tr>
+                                <tr>
+                                    <td>Discourse particles</td>  
+                                    <td>75(14)</td>
+                                    <td>52(16)</td>                                 
+                                </tr>
+                                <tr>
+                                    <td>Discourse markers</td>  
+                                    <td>21(4)</td>
+                                    <td>53(8)</td>                                 
+                                </tr>
+                                <tr>
+                                    <td>Fillers</td>
+                                    <td>56(8)</td>
+                                    <td>214(11)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td rowspan="13" style="vertical-align: middle;text-align: center;">POS</td>
+                                    <td>Verbs</td>
+                                    <td>1,612(252,16)</td>
+                                    <td>1,857(287,16)</td> 
+            
+                                </tr>
+                                <tr>
+                                    <td>Adverbs</td>  
+                                    <td>1,038(71,6)</td>
+                                    <td>1,388(75,6)</td>                                  
+                                </tr>
+                                <tr>
+                                    <td>Nouns</td>  
+                                    <td>1,209(135,7)</td>
+                                    <td>1,254(148,7)</td>                                  
+                                </tr>
+                                <tr>
+                                    <td>Pronouns</td>
+                                    <td>334(10,1)</td>
+                                    <td>650(11,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Determinatives</td> 
+                                    <td>251(25,5)</td>
+                                    <td>344(28,5)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Preposition</td>
+                                    <td>155(15,1)</td>
+                                    <td>241(20,1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Conjunctions</td>
+                                    <td>79(15,4)</td>
+                                    <td>92(15,4)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Structural particles DE</td>
+                                    <td>131(2,1)</td>
+                                    <td>107(2,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Classifiers</td>
+                                    <td>163(7,1)</td>
+                                    <td>239(8,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Particles</td>
+                                    <td>170(10,1)</td>
+                                    <td>183(10,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Adjectives</td>
+                                    <td>2(1,1)</td>
+                                    <td>2(1,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Interjection</td>
+                                    <td>0</td>
+                                    <td>0</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Copula</td>   
+                                    <td>49(1,1)</td>
+                                    <td>72(2,1)</td>                                 
+                                </tr>
+                                
+                                <tr>
+                                    <td style="text-align: center;">Character</td>
+                                    <td></td>
+                                    <td>7,467(378)</td>
+                                    <td>9,102(408)</td> 
+            
+                                </tr>
+                                <tr>
+                                    <td rowspan="2" style="vertical-align: middle;text-align: center">Syllable</td>
+                                    <td>Tone-distinctive</td>
+                                    <td>311</td>
+                                    <td>349</td> 
+            
+                                </tr>
+                                <tr>
+                                    <td>No tone distinction</td>
+                                    <td>215</td>
+                                    <td>236</td>    
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Phoneme</td>
+                                    <td></td>
+                                    <td>17,046</td>
+                                    <td>21,022</td>
+     
+                                </tr>                              
+                            <tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <p class="text-center text-white my-md-2 my-1">Copyright &copy; 中央研究院語言學研究所 Institute of Linguistics, Academia Sinica.</p>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+</body>
+</html>

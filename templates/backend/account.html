@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <title>帳號管理|中研院中文口語語料庫檢索系統後端管理 ILAS Chinese Spoken Language Resources Management</title>
+
+    <link href="{% static 'backend/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'backend/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet">
+    <link href="{% static 'backend/css/common.css' %}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column">
+    <header class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a href="#" class="d-flex align-items-center justify-content-center text-decoration-none px-2">
+                <img src="{% static 'backend/images/logo-s.png' %}" alt="中研院中文口語語料庫檢索系統後端管理" width="233" height="60">
+            </a>
+            <nav class="d-flex justify-content-end">
+                <ul class="nav navbar-nav flex-row me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_resource">授權資源管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_corpus">語料管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_record">日誌查詢</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">帳號管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_manual">操作手冊</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_index">登出</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="title d-block border-bottom mb-2">
+        <h2 class="h3 py-3 m-0 text-center">帳號管理</h2>
+    </div>
+
+    <main class="container-fluid">
+        <div class="container my-4 fs-6 border-bottom">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" onclick="newmember()" id="newmember_btn" class="btn btn-primary">新增會員帳號</button>
+                </div>
+            </div>
+            <div class="row g-3 needs-validation d-flex align-items-start py-3" novalidate>
+                <div class="col-md-4">
+                    <label for="inputName" class="form-label"><span class="text-danger">*</span> 姓名</label>
+                    <input type="text" class="form-control" id="inputName" value="" required>
+                    <div class="invalid-feedback">
+                        必填
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputAccount" class="form-label"><span class="text-danger">*</span> 帳號</label>
+                    <input type="text" class="form-control" id="inputAccount" value="" required>
+                    <div class="valid-feedback">
+                        帳號可用！
+                    </div>
+                    <div class="invalid-feedback" id="account_error">
+                        必填
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label d-block">&nbsp;</label>
+                    <button type="button" onclick="checkaccount()" class="btn btn-info text-light py-1">檢查帳號重複?</button>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputUnit" class="form-label">所屬機構</label>
+                    <input type="text" class="form-control" id="inputUnit" value="">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputEmail" class="form-label"><span class="text-danger">*</span> 電子郵件</label>
+                    <input type="email" class="form-control" id="inputEmail" value="" required>
+                    <div class="valid-feedback">
+                        電子郵件可用！
+                    </div>
+                    <div class="invalid-feedback" id="email_error">
+                        必填
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label d-block">&nbsp;</label>
+                    <button type="button" id="checkemail_btn" onclick="checkemail()" class="btn btn-info text-light py-1">檢查電郵重複?</button>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputTel" class="form-label">聯絡電話</label>
+                    <input type="text" class="form-control" id="inputTel" value="">
+                </div>
+                <div class="col-md-4 d-md-block d-none">
+                    &nbsp;
+                </div>
+                <div class="col-md-4 d-md-block d-none">
+                    &nbsp;
+                </div>
+                <div class="col-md-4">
+                    <label for="inputEffectiveDate" class="form-label"><span class="text-danger">*</span> 帳號生效日</label>
+                    <input type="text" class="form-control" id="inputEffectiveDate" value="" required>
+                    <div class="invalid-feedback">
+                        必填
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputExpiryDate" class="form-label"><span class="text-danger">*</span> 帳號有效日期</label>
+                    <input type="text" class="form-control" id="inputExpiryDate" value="" required>
+                    <div class="invalid-feedback">
+                        必填
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary mx-1" onclick="modify_member()" id="modify_member_btn" type="submit">儲存</button>
+                    <button  id="notice_member_btn" onclick="notice()" class="btn btn-success mx-1">通知新帳號密碼</button>
+                </div>
+            </div>
+        </div>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12">
+                    <table id="recordTable1" class="table table-striped table-hover w-100 py-2">
+                        <thead class="table-light">
+                            <tr>
+                                <th>所屬機構</th>
+                                <th>帳號</th>
+                                <th>姓名</th>
+                                <th>Email</th>
+                                <th>電話</th>
+                                <th>帳號有效期限</th>
+                                <th>動作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <div>
+            <p class="text-center text-white my-md-2 my-1">Copyright &copy; Institute of Linguistics, Academia Sinica.</p>
+        </div>
+    </footer>
+    <script src="{% static 'backend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'backend/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'backend/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'backend/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'backend/js/checkemail.js' %}"></script>
+    <script src="{% static 'backend/js/checkaccount.js' %}"></script>
+    <script src="{% static 'backend/js/get_member.js' %}"></script>
+    <script src="{% static 'backend/js/newmember.js' %}"></script>
+    <script src="{% static 'backend/js/modify_member.js' %}"></script>
+    <script src="{% static 'backend/js/notice_member.js' %}"></script>
+    <script src="{% static 'backend/js/datatable_motify_btn.js' %}"></script>
+    <script src="{% static 'backend/js/datatable_delete_btn.js' %}"></script>
+    <script src="{% static 'backend/js/common.js' %}"></script>
+    <script type="text/javascript">
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var formattedDate = year + '/' + month + '/' + day;
+        $(inputEffectiveDate).val(year + '/' + month + '/' + day);
+        $(inputExpiryDate).val (year+1 + '/' + month + '/' + day);
+        get_member();
+    </script>
+</body>
+</html>

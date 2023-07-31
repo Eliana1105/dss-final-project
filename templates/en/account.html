@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Account | ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
+    <meta property="og:description" content="ILAS Chinese Spoken Language Resources System" />
+    <meta name="description" content="ILAS Chinese Spoken Language Resources System" />
+    <title>Account | ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+<body class="page d-flex flex-column h-100">
+    <header class="navbar navbar-light navbar-expand-lg sticky-top py-0 px-3">
+        <a class="navbar-brand logo position-relative" href="../index.html" data-lang="">
+            <img src="{% static 'images/logo-s.png' %}" alt="ILAS Chinese Spoken Language Resources System" height="70">
+        </a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ILAS Chinese Spoken Language Resources System</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Home
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_en{% else %}/signin_en{% endif %}">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_en{% else %}/signin_en{% endif %}">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_en">Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_en">Copyright</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_ch">中文</a>
+                    </li>
+                </ul>
+                <!-- account nav -->
+                {% if has_session %}
+                <ul class="navbar-nav flex-grow-1 nav-account">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                    </li>
+                </ul> 
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container p-0 px-2 bg-white bg-opacity-75">
+        <div class="row gx-3 gy-2">
+            <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
+                <div class="position-relative my-3">
+                    <h1 class="title"><span class="px-3">Account</span></h1>
+                </div>
+
+                <div class="font-sizing d-block text-end pb-2">
+                    <button type="button" class="size0 btn btn-outline-secondary" onclick="fontSize(0)">S</button>
+                    <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1)">M</button>
+                    <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2)">L</button>
+                </div>
+                
+                <div class="pb-5 mb-5">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item col" role="presentation">
+                            <button class="nav-link border-0 fs-5 w-100 active" id="item1-tab" data-bs-toggle="tab" data-bs-target="#item1" type="button" role="tab" aria-controls="item1" aria-selected="true">Account info</button>
+                        </li>
+                        <li class="nav-item col" role="presentation">
+                            <button class="nav-link border-0 fs-5 w-100" id="item2-tab" data-bs-toggle="tab" data-bs-target="#item2" type="button" role="tab" aria-controls="item2" aria-selected="false">Change password</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-3" id="myTabContent">
+                        <div class="tab-pane fade content show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+                            <p>中研院語料庫ＷＷＷ版所有功能均開放使用，但為防主機資源耗用過劇及顧及資料傳輸之實際限制，暫以檢索結果為限制的條件：院內檢索限兩萬行資料，院外檢索限兩千行資料。</p>
+                        </div>
+                        <div class="tab-pane fade content" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+                            <p>本介面提供一些功能將檢索出來的資料作處理，而且處理出來的語料可以再次處理，形成一層又一層的語料。</p>
+                            <p>本介面所提供的功能有以下五種：<br> 一、排序：檢索出來的資料是依照在語料庫中的次序來排列，透過排序功能可以調整語料排列順序，更方便觀察或比較； 二、詞類累計：若想對語料的語法特性作更進一步的觀察，可以利用此功能統計每種詞類出現的次數； 三、過濾：檢索出來的資料可能很龐雜，可以利用本功能作更進一步的篩選； 四、collocation統計：本功能提供統計數據來表示關鍵詞和前後的詞或詞類一起出現的機率； 五、畫面切換：可以隨時跳換到「自訂語料庫」、「內容檢索」重新檢索，或進入每一層語料顯示畫面。</p>
+                            <p>1. 排序：以本次檢索結果為範圍，依照設定對象及依據將資料依次排列。</p>
+                            <p>2. 詞類累計：以本次檢索結果為範圍，統計關鍵詞及其前後語境內不同詞類出現次數。</p>
+                            <p>3. 過濾：以本次檢索結果為範圍，依照設定條件和範圍作過濾。</p>
+                            <p>4. collocation統計：以本次檢索結果為範圍，計算關鍵詞與其語境內所含詞或詞類間的共現率（collocation）。共現率是以互見訊息值（ＭＩ值：mutual information value）為準則。互見訊息值表示兩個單位同時出現的機率，值越高，表示共現率越高；反之，值愈低，表示共現率越低。</p>
+                            <p>5. 畫面切換<br>     第一次由自訂語料庫和內容檢索畫面檢索出來的語料屬於第一層語料。如果進階處理將該語料縮減，則會形成第二層語料。第二層語料還可以進階處理，形成第三層語料。以此類推，最多可以記錄十層語料。<br>        畫面上方會有「自訂語料庫畫面」。將滑鼠移到「自訂語料庫畫面」按一下，就會進入自訂語料庫畫面的介面。進入「自訂語料庫畫面」表示要重新檢索資料，目前的語料將全部取消。<br>        畫面上方會有「內容檢索畫面」。將滑鼠移到「內容檢索畫面」按一下，就會進入內容檢索畫面的介面。進入「內容檢索畫面」表示要重新鍵入新的檢索條件值，之前所鍵入的檢索條件值將消失，檢索資料的範圍，則仍是之前所自訂的語料庫。<br>        畫面上方有「上層結果」、「本層結果」或「下層結果」。將滑鼠移到「上層結果」按一下，就會進入上層的語料顯示畫面；將滑鼠移到「本層結果」按一下，就會進入這一層語料顯示畫面；將滑鼠移到「下層結果」按一下，就會進入下層的語料顯示畫面。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <p class="text-center text-white my-md-2 my-1">Copyright &copy; Institute of Linguistics, Academia Sinica.</p>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+</body>
+</html>

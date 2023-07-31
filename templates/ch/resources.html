@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="免費授權資源 | 中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
+    <meta property="og:description" content="中研院中文口語語料庫檢索系統" />
+    <meta name="description" content="中研院中文口語語料庫檢索系統" />
+    <title>免費授權資源 | 中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+<body class="page d-flex flex-column h-100">
+    <header class="navbar navbar-light navbar-expand-lg sticky-top py-0 px-3">
+        <a class="navbar-brand logo position-relative" href="/index" data-lang="">
+            <img src="{% static 'images/logo-s.png' %}" alt="中研院中文口語語料庫檢索系統" height="70">
+        </a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">中研院中文口語語料庫檢索系統</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          簡介
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item" href="/corpus_list_ch">語料庫</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_ch">語料處理</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_ch">授權資訊</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_ch{% else %}/signin_ch{% endif %}">語料檢索</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1 active" href="{% if 'login' in request.session %}/resources_ch{% else %}/signin_ch{% endif %}">學術資源</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_ch">系統說明</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_ch">權利宣告</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/resources_en">English</a>
+                    </li>
+                </ul>
+                <!-- account nav -->
+                {% if has_session %}
+                <ul class="navbar-nav flex-grow-1 nav-account">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/account_ch">帳號</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                    </li>
+                </ul> 
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container p-0 px-2 bg-white bg-opacity-75">
+        <div class="row gx-3 gy-2">
+            <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
+                <div class="position-relative my-3">
+                    <h1 class="title"><span class="px-3">學術資源</span></h1>
+                </div>
+
+                <div class="pb-5 mb-5">
+                    <div class="accordion accordion-flush" id="accordionResources">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="resources-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseOne" aria-expanded="false" aria-controls="resources-collapseOne">
+                                    中研院中文口語詞頻表
+                                </button>
+                            </h2>
+                            <div id="resources-collapseOne" class="accordion-collapse collapse" aria-labelledby="resources-headingOne" data-bs-parent="#accordionResources">
+                                <div class="accordion-body">
+                                    <p>以中研院中文對話語料庫（約50萬詞）做為基礎所製作之資料表。「中研院中文口語詞頻表」（中研院覽號 24T-1080124）包含台灣成人對話所使用之詞彙、音節、聲調之頻率（個別頻率與累積頻率）與詞類標記等相關訊息。</p>
+                                    <div class="d-flex justify-content-center py-2">
+                                        <a href="#" class="btn btn-outline-primary text-center">同意並下載</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="resources-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseTwo" aria-expanded="false" aria-controls="resources-collapseTwo">
+                                    中研院中文口語音節結構組合頻率表 
+                                </button>
+                            </h2>
+                            <div id="resources-collapseTwo" class="accordion-collapse collapse" aria-labelledby="resources-headingTwo" data-bs-parent="#accordionResources">
+                                <div class="accordion-body">
+                                    <p>「中研院中文口語音節結構組合頻率表」（中研院覽號 24T-1080125）是以「中研院中文口語詞頻表」之詞彙頻率為本，按照聲母與韻母之音節結構進行標註之後計算其組合頻率。以橫軸為韻母，縱軸為聲母之行列式，將各式音節結構之組合以於「中研院中文口語詞頻表」出現之頻率為其值；標示該組合見於中文口語之使用，與其出現之頻率。空白則表示該組合沒有出現於「中研院中文口語詞頻表」。聲母與韻母則以國際音標與注音符號兩種表達方式呈現。</p>
+                                    <div class="d-flex justify-content-center py-2">
+                                        <a href="#" class="btn btn-outline-primary text-center">同意並下載</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer mt-auto px-lg-5 px-2">
+        <p class="text-center text-white my-md-2 my-1">Copyright &copy; 中央研究院語言學研究所 Institute of Linguistics, Academia Sinica.</p>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+</body>
+</html>
