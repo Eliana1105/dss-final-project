@@ -2220,9 +2220,9 @@ def search_corpus(request) :
 		if len(check_options) == 2 :
 			sql = "SELECT `IPUStart`,`IPUEnd`,`IPU`,Child.Speaker_id,Child.theme FROM `Child_File` JOIN  `Child`  ON Child_File.Cid = Child.id ;"
 		elif '5' in check_options :
-			sql = "SELECT `IPUStart`,`IPUEnd`,`IPU`,Child.Speaker_id,Child.theme  FROM `Child_File` JOIN  `Child`  ON Child_File.Cid = Child.id  WHERE Child.theme ='Child_HI';"
-		else :
 			sql = "SELECT `IPUStart`,`IPUEnd`,`IPU`,Child.Speaker_id,Child.theme  FROM `Child_File` JOIN  `Child`  ON Child_File.Cid = Child.id  WHERE Child.theme ='Child_NH';"
+		else :
+			sql = "SELECT `IPUStart`,`IPUEnd`,`IPU`,Child.Speaker_id,Child.theme  FROM `Child_File` JOIN  `Child`  ON Child_File.Cid = Child.id  WHERE Child.theme ='Child_HI';"
 	
 	cursor.execute(sql)
 	results = cursor.fetchall()
@@ -2249,7 +2249,7 @@ def search_corpus(request) :
 			data.ipuend = row[1]
 			data.ipu = row[2]
 			data.filename = row[3]
-			if(row[4] == 'Child_HI') :
+			if(row[4] == 'Child_NH') :
 				data.theme = "說故事─龜兔賽跑（聽常兒童）"
 			else:
 				data.theme = "說故事─龜兔賽跑（聽損兒童）"
