@@ -1395,10 +1395,6 @@ def backend_create_account(request):
 
 			# 生成 8 碼的隨機亂碼
 			password = ''.join(random.choice(characters) for _ in range(8))
-			subject = "語料庫密碼"
-			body = "您的密碼是 : %s"%password
-			recipients = ["%s"%email]
-			send_email(subject, body, recipients)
 			sql = "INSERT INTO `Member` (`account`, `pwd`, `name`, `email`, `phone`, `institution`, `Log_time`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')"%(account, password, name, email, phone, institution, date_string)
 			cursor.execute(sql)
 			db.commit()
