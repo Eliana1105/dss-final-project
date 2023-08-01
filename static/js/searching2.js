@@ -76,10 +76,10 @@ function updatePagination(currentPage){
             "text_number":number,
             "condition":conditionJson,
             "checkbox_value": CheckOptions_value,
-            "selected_value": RadioValue
+            "selected_value": RadioValue,
+            "page":currentPage
         },
         success: function(data) {
-            alert(123)
             var find_string = '<div id="searchScope"class="alert px-2 py-1"role="alert"><p class="m-2"><strong>找到'+data['serach_num']+' 筆 / 總共'+ data['total']+' 筆。</strong></p></div>';
             $('#find_bar').html(find_string);            
             var temp = '';
@@ -140,15 +140,14 @@ function updatePagination(currentPage){
             $('#Pagination1').html(temp);
             $('#Pagination2').html(temp);
             temp = ''
-            var start = 50*(currentPage-1);
-            for (var i = start; i <start+50&& i<data_array.length; i++) {
+            for (var i = 0;  i<data_array.length; i++) {
         
                 temp +=' <div id="';
                 temp += 'content_';
                 temp += i+1;
                 temp +='"class="table-row table-rows--body  py-1 flex-wrap align-items-center">';
                 temp +=' <div class="table-cell d-table-cell" data-title="編號">';
-                temp+=i+1;
+                temp+=i+1+(50*(currentPage-1));
                 temp += '</div><div class="table-cell d-table-cell" data-title="語料庫名稱" title="">'
                 temp += data_array[i]['theme'];
                 temp +='</div>';

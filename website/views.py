@@ -2180,13 +2180,14 @@ def search_corpus(request) :
 	condition_json = request.POST['condition']
 	selected_option = request.POST.get('selected_value')
 	check_options = request.POST.get('checkbox_value')
-
+	page = int(request.POST['page'])
 	selected_option = json.loads(selected_option)
 	check_options = json.loads(check_options)
 	condition = json.loads(condition_json)
 	main_value = request.POST['main_value']
 	mode = int(request.POST['mode'])
 	temp_pos = 0
+	page = page-1
 	total =0
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -2359,8 +2360,10 @@ def search_corpus(request) :
 					row.sub_content_array = temp2
 		
 	db.close()
+	my_len = len(temp3)
+	temp3 = temp3[50*page:50*(page+1)]
 	json_data = json.dumps([content.to_json() for content in temp3], indent=4)
-	return JsonResponse({'total': total,'serach_num':len(temp3),'search_corpus':json_data})
+	return JsonResponse({'total': total,'serach_num':my_len,'search_corpus':json_data})
 
 @csrf_exempt
 def search_MHcorpus(request):
