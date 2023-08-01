@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 import json			
 import openpyxl
-import pymysql
+import pymysql 
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseBadRequest
 from datetime import datetime, date
@@ -2367,6 +2367,8 @@ def search_MHcorpus(request):
 	main = json.loads(request.POST['main'])
 	pos = 0
 	mode = int(request.POST['mode'])
+	page = int(request.POST['page'])
+	print(page)
 	if(mode==2 or mode==3) :
 		pos = int(request.POST['text_number'])
 	check = json.loads(request.POST['check'])
@@ -2932,6 +2934,8 @@ def search_MHcorpus(request):
 									if(each[1]  in sub) :
 										is_matched = True
 										if(each[2]!=""):
+											print(sub)
+											print(sub2)
 											try :
 												my_index = my_word.index(each[1])
 												if(my_pos[my_index] == each[2]) :
@@ -2986,6 +2990,7 @@ def search_MHcorpus(request):
 										break
 
 				if(is_matched) :
+
 					text_count = 20
 					start_time = content_data[index].start_time
 					temp = []
@@ -3025,9 +3030,10 @@ def search_MHcorpus(request):
 					my_conversation.talk_id = data_content.talk_id
 					my_conversation.theme = data_content.theme
 					results.append(my_conversation)
-	
+	my_len = len(results)				
+	results = results[page*5:(page+1)*5]
 	json_data = json.dumps([content.to_json() for content in results], indent=4)
-	return JsonResponse({'total': total_count,'serach_num':len(results),'search_corpus':json_data})
+	return JsonResponse({'total': total_count,'serach_num':my_len,'search_corpus':json_data})
 
 @csrf_exempt
 def account_detail(request):

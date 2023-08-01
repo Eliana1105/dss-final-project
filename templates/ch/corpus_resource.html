@@ -88,6 +88,45 @@
 
                <div class="pb-5 mb-5">
                     <div class="accordion accordion-flush" id="accordionResources">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="resources-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseOne" aria-expanded="false" aria-controls="resources-collapseOne">
+                                  中研院漢語對話語音語料庫 Sinica MCDC8
+                                </button>
+                            </h2>
+                            <div id="resources-collapseOne" class="accordion-collapse collapse" aria-labelledby="resources-headingOne" data-bs-parent="#accordionResources">
+                                <div class="accordion-body">
+                                    <p>「中研院漢語對話語音語料庫Sinica MCDC8」包含八個對話之聲檔與文字轉記檔。文字轉記檔以PRAAT格式儲存，具有人工驗證之段落時間標記。學術授權請洽中華民國計算語言學學會（<a href="https://www.aclclp.org.tw/use_mat_c.php#mcdc" target="_blank">https://www.aclclp.org.tw/use_mat_c.php#mcdc</a>）</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="resources-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseTwo" aria-expanded="false" aria-controls="resources-collapseTwo">
+                                  中研院具音段標記之中文對話語音資料庫
+                                </button>
+                            </h2>
+                            <div id="resources-collapseTwo" class="accordion-collapse collapse" aria-labelledby="resources-headingTwo" data-bs-parent="#accordionResources">
+                                <div class="accordion-body">
+                                    <p>「中研院具音段標記之中文對話語音資料庫」包含3.5小時，16人的帶音段標記之對話語音資料。包含音節與音段時間標記的文字檔案以PRAAT格式儲存 (.TextGrid)。所有標記邊界皆經過人工驗證。此資料庫為Sinica MCDC8的一部分。</p>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="resources-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseThree" aria-expanded="false" aria-controls="resources-collapseThree">
+                                  中研院中文核心辭彙表
+                                </button>
+                            </h2>
+                            <div id="resources-collapseThree" class="accordion-collapse collapse" aria-labelledby="resources-headingThree" data-bs-parent="#accordionResources">
+                                <div class="accordion-body">
+                                    <p>「中研院中文核心辭彙表（Sinica Chinese Core Vocabulary）」包含1,121個中文高頻詞。本詞彙表所包含之詞彙衍生自中央研究院平衡語料庫與中研院中文對話語音語料庫前2000個高頻詞之交集。平衡語料庫詞頻訊息來自由中華民國計算語言學學會所授權之「漢語平衡語料庫詞集及詞頻統計」；中研院中文對話語音語料庫詞頻訊息來自「中研院中文口語詞頻表」。本詞彙表訊息包含詞類，書面語與對話語料庫各詞彙之使用次數、頻率、詞頻排序、英文翻譯、中文例句與英文例句。學術授權請洽中華民國計算語言學學會（<a href="https://www.aclclp.org.tw/use_sccv_c.php" target="_blank">https://www.aclclp.org.tw/use_sccv_c.php</a>）。</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,6 +140,8 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/common.js' %}"></script>
-    <script src="{% static 'js/load_resource.js' %}"></script>
+    
 </body>
 </html>
+
+

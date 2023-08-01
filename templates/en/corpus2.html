@@ -31,13 +31,13 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle py-1 active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Home
                         </a>
                         <ul class="dropdown-menu p-0 rounded-0">
                             <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
                             <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
-                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Licensing info</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -53,17 +53,17 @@
                         <a class="nav-link py-1" href="/copyright_en">Copyright</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/corpus2_ch">中文</a>
+                        <a class="nav-link py-1" href="/corpus2_ch">Chinese</a>
                     </li>
                 </ul>
                 <!-- account nav -->
                 {% if has_session %}
                 <ul class="navbar-nav flex-grow-1 nav-account">
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                        <a class="nav-link py-1" href="/account_en">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                        <a class="nav-link py-1" href="#" onclick="logout()">Logout</a>
                     </li>
                 </ul> 
                 {% endif %}
@@ -75,7 +75,8 @@
         <div class="row gx-3 gy-2">
             <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
                 <div class="position-relative my-3">
-                    <h1 class="title"><span class="px-3">Mandarin Conversational Dialogue Corpus</span></h1>
+                    <h1 class="title"><span class="px-3">Sinica Sociophonetic Corpus
+                        </span></h1>
                 </div>
 
                 <div class="font-sizing d-block text-end pb-2">
@@ -85,75 +86,118 @@
                 </div>
                 
                 <div class="content pb-5 mb-5">
-                    <p>中研院語料庫ＷＷＷ版所有功能均開放使用，但為防主機資源耗用過劇及顧及資料傳輸之實際限制，暫以檢索結果為限制的條件：院內檢索限兩萬行資料，院外檢索限兩千行資料。</p>
-                    <img src="../images/chara.png" alt="">
+                    <p>The Sinica Sociophonetic Corpus was funded by the National Digital Archives Project. The purpose of this corpus project was to document and archive the contemporary use of spoken Taiwan Mandarin. Recording was conducted in twelve regions distributed across northern, middle, and southern Taiwan, including Yilan County, Taoyuan County, Hsinchu County, Taichung City, Nantou County, Yunlin County, Chiayi City, Changhua County, Tainan City, Kaohsiung City, Kaoshiung County, and Taipei City. A total of 1,402 interviews mainly with individuals aged 20 to 40 years were recorded in public places, e.g., parks, post offices, or banks, where we assumed we were most likely to find local people. The interviews were recorded by using the Sony Hi-MD MZ-RH1 digital recorder and the Sony ECM MS907 microphone, digitized at a sampling rate of 44.1 kHz with 16-bit quantization. The speech content of the interviewees was orthographically transcribed in traditional Chinese characters with annotations of paralinguistic sounds and pauses. 
+                        Twenty-five questions in three categories were directed to the interviewees, including information about the language use, socioeconomic background, and use of the internet of the interviewees. Concerning language use, dialect exposure was particularly specified in the way the spoken dialects, mainly Southern Min and Hakka, are used within a family, e.g., to parents and siblings. Questions about language ability are concerned with how many languages the interviewees can speak and how good they are. Concerning socioeconomic background, data on age, gender, salary level, education level and childhood residence were sought. The length of individual interviews ranged from three to eight minutes. All interviews were conducted in Taiwan Mandarin. Only the speech produced by the interviewees was transcribed and processed. The corpus statistics are summarized as follows.
+                        </p>
+                   <img src="../images/chara.png" alt="">
                     <p><br></p>
-                    <h5 class="text-center">附錄二：特徵標記表</h5>
+                    <h5 class="text-center">表：中研院中文對話語音語料庫統計數據</h5>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">特徵標記</th>
-                                    <th scope="col">標記定義</th>
-                                    <th scope="col">例子</th>
+                                    <th scope="col" style="text-align: center;">項目</th>
+                                    <th scope="col">描述</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>+attr</td>
-                                    <td>偏正詞語（aspect）</td>
-                                    <td>如：東風(NA2)[+attr]</td>
+                                    <td style="text-align: center;">IPU</td>
+                                    <td>124,916</td>
+                                    
                                 </tr>
                                 <tr>
-                                    <td>+co</td>
-                                    <td>並列詞語</td>
-                                    <td>如：公卿(NA1)[+co]</td>
+                                    <td rowspan="9" style="vertical-align: middle;text-align: center;">Word</td>
+                                    <td>Lexical words: 284,196 (7,085)</td>
+                                    
                                 </tr>
                                 <tr>
-                                    <td>+poly</td>
-                                    <td>複音詞語</td>
-                                    <td>如：蹻然(VI)[+poly]、熙熙(VI)[+poly]</td>
+                                    <td>1-syllabic words: 133,354 (1,007)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+prop</td>
-                                    <td>含專名的詞語</td>
-                                    <td>如：鴻範(NB2)[+prop]</td>
+                                    <td>2-syllabic words: 129,060 (4,218)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+rd</td>
-                                    <td>連綿詞</td>
-                                    <td>如：蒼庚(NA1)[+rd]、螳蜋(NA1)[+rd]</td>
+                                    <td>3-syllabic words: 20,348 (1,585)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+others</td>
-                                    <td>其他詞語</td>
-                                    <td>如：鞀鞞鼓(NA2)[+others]</td>
+                                    <td>Others: 1,434 (275)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+nv</td>
-                                    <td>名謂語</td>
-                                    <td>如：民殃(VH1)[+nv]於</td>
+                                    <td>Discourse-related items: 122,634 (718)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+p1</td>
-                                    <td>合併中插-前</td>
-                                    <td>如：叫不(Dc)[+vrd]醒</td>
+                                    <td>Discourse particles: 28,928 (33)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+p2</td>
-                                    <td>合併中插-後</td>
-                                    <td>如：共明弓矢(NA2)[+p2]</td>
+                                    <td>Discourse markers: 3,993 (12)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+jj</td>
-                                    <td>假借字</td>
-                                    <td>如：公用享(VH1)[+jj]于天子</td>
+                                    <td>Fillers: 28,826 (21)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+on</td>
-                                    <td>其他詞類作名詞</td>
-                                    <td>如：君其將以為戮(NA1)[+on]</td>
+                                    <td rowspan="14" style="vertical-align: middle;text-align: center;">POS</td>
+                                    <td>Verbs: 58,894 (2,135, 16)</td>
+            
                                 </tr>
+                                <tr>
+                                    <td>Adverbs: 42,750 (367, 6)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Nouns: 88,146 (4,423, 7)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Pronouns: 10,020 (33, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Determinatives: 18,700 (362, 5)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Preposition: 11,499 (66, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Conjunctions: 9,817 (64, 4)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Structural particles DE: 6,655 (7, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Classifiers: 5,917 (76, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Particles: 6,324 (19, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Adjectives: 683 (102, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Interjection: 3 (2, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Copula: 10,275 (4, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Foreign words: 2,579 (235, 1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Character</td>
+                                    <td>458,320 (2,006)</td>
+            
+                                </tr>
+                                <tr>
+                                    <td rowspan="2" style="vertical-align: middle;text-align: center">Syllable</td>
+                                    <td>Tone-distinctive 929</td>
+            
+                                </tr>
+                                <tr>
+                                    <td>No tone distinction 375</td>    
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Phoneme</td>
+                                    <td>1,102,753</td>
+     
+                                </tr>                              
                             <tbody>
                         </table>
                     </div>

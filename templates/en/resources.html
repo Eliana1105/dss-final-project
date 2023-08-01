@@ -38,14 +38,14 @@
                         <ul class="dropdown-menu p-0 rounded-0">
                             <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
                             <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
-                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Licensing info</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_en{% else %}/signin_en{% endif %}">Search</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1 active" href="{% if 'login' in request.session %}/resources_en{% else %}/signin_en{% endif %}">Resources</a>
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_en{% else %}/signin_en{% endif %}">Resources</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link py-1" href="/guide_en">Guide</a>
@@ -54,17 +54,17 @@
                         <a class="nav-link py-1" href="/copyright_en">Copyright</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/resources_ch">中文</a>
+                        <a class="nav-link py-1" href="/resources_ch">Chinese</a>
                     </li>
                 </ul>
                 <!-- account nav -->
                 {% if has_session %}
                 <ul class="navbar-nav flex-grow-1 nav-account">
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                        <a class="nav-link py-1" href="/account_en">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                        <a class="nav-link py-1" href="#" onclick="logout()">Logout</a>
                     </li>
                 </ul> 
                 {% endif %}
@@ -84,14 +84,14 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="resources-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseOne" aria-expanded="false" aria-controls="resources-collapseOne">
-                                  資源名稱 #1
+                                    Sinica Chinese Spoken Wordlist
                                 </button>
                             </h2>
                             <div id="resources-collapseOne" class="accordion-collapse collapse" aria-labelledby="resources-headingOne" data-bs-parent="#accordionResources">
-                                <div class="accordion-body text-center">
-                                    <div class="btn-group">
-                                      <a href="#" class="btn btn-outline-primary">同意書內容</a>
-                                      <a href="#" class="btn btn-outline-primary">同意並下載</a>
+                                <div class="accordion-body">
+                                    <p>The Sinica Chinese Spoken Wordlist (Sinica File No. 24T-1080124) was mainly derived from the transcripts of the adult conversational speech corpora (the TMC), supplemented with a small number of words from other sources. The phonetic transcription of the words was thoroughly examined, including homographs and tone variants. As a result, the Wordlist provides Hanyu Pinyin with tone category labels, POS, frequency and accumulated frequency of ordinary words (405,435 tokens, 16,683 types). Frequency information about discourse-related items is provided in three categories of discourse markers, particles, and fillers (57,697 tokens, 124 types). </p>
+                                    <div class="d-flex justify-content-center py-2">
+                                        <a href="#" class="btn btn-outline-primary text-center">agree and download</a>
                                     </div>
                                 </div>
                             </div>
@@ -99,33 +99,19 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="resources-headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseTwo" aria-expanded="false" aria-controls="resources-collapseTwo">
-                                  資源名稱 #2
+                                    Sinica Chinese Syllable Structure Frequency List
                                 </button>
                             </h2>
                             <div id="resources-collapseTwo" class="accordion-collapse collapse" aria-labelledby="resources-headingTwo" data-bs-parent="#accordionResources">
-                                <div class="accordion-body text-center">
-                                    <div class="btn-group">
-                                      <a href="#" class="btn btn-outline-primary">同意書內容</a>
-                                      <a href="#" class="btn btn-outline-primary">同意並下載</a>
+                                <div class="accordion-body">
+                                    <p>Derived from the word information out of the Wordlist, the Sinica Chinese Syllable Structure Frequency List (Sinica File No. 24T-1080125) contains eligible onset-rhyme combinations in Chinese with frequency information. For applications in linguistic research, it can be used for designing stimuli in experiments that are related to the authentic use of spoken Chinese.</p>
+                                    <div class="d-flex justify-content-center py-2">
+                                        <a href="#" class="btn btn-outline-primary text-center">agree and download</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="resources-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resources-collapseThree" aria-expanded="false" aria-controls="resources-collapseThree">
-                                  資源名稱 #3
-                                </button>
-                            </h2>
-                            <div id="resources-collapseThree" class="accordion-collapse collapse" aria-labelledby="resources-headingThree" data-bs-parent="#accordionResources">
-                                <div class="accordion-body text-center">
-                                    <div class="btn-group">
-                                      <a href="#" class="btn btn-outline-primary">同意書內容</a>
-                                      <a href="#" class="btn btn-outline-primary">同意並下載</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

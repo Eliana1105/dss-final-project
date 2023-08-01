@@ -31,13 +31,13 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle py-1 active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Home
                         </a>
                         <ul class="dropdown-menu p-0 rounded-0">
                             <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
                             <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
-                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Licensing info</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -53,17 +53,17 @@
                         <a class="nav-link py-1" href="/copyright_en">Copyright</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/corpus3_ch">中文</a>
+                        <a class="nav-link py-1" href="/corpus3_ch">Chinese</a>
                     </li>
                 </ul>
                 <!-- account nav -->
                 {% if has_session %}
                 <ul class="navbar-nav flex-grow-1 nav-account">
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                        <a class="nav-link py-1" href="/account_en">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                        <a class="nav-link py-1" href="#" onclick="logout()">Logout</a>
                     </li>
                 </ul> 
                 {% endif %}
@@ -75,7 +75,8 @@
         <div class="row gx-3 gy-2">
             <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
                 <div class="position-relative my-3">
-                    <h1 class="title"><span class="px-3">Mandarin Map Task Corpus</span></h1>
+                    <h1 class="title"><span class="px-3">Sinica Child Speech Corpus
+                        </span></h1>
                 </div>
 
                 <div class="font-sizing d-block text-end pb-2">
@@ -85,75 +86,170 @@
                 </div>
                 
                 <div class="content pb-5 mb-5">
-                    <p>中研院語料庫ＷＷＷ版所有功能均開放使用，但為防主機資源耗用過劇及顧及資料傳輸之實際限制，暫以檢索結果為限制的條件：院內檢索限兩萬行資料，院外檢索限兩千行資料。</p>
+                    <P>The Sinica Child Speech Corpus was funded by the National Science Council and the Children’s Hearing Foundation. It contains repetitive and narrative speech data produced by seventy-nine preschool children with normal hearing (NH) aged 2;11~6;3 (median 5;0) and forty-five children with hearing impairment (HI) aged 3;3~12;5 (median 5;9). Among the HI children, thirty wore traditional hearing aids (with mild to profound degrees of hearing loss), and fifteen were fitted with a cochlear implant (with severe to profound degrees of hearing loss). The HI children were recorded during their regular AVT session using the video equipment built into the sound-proof classrooms of the Children’s Hearing Foundation. Adobe Audition 1.0 was used to convert the video files into 44100 Hz, 16-bit single-channel sound files. The NH children were recorded either at Academia Sinica in sound-proof studios or in quiet classrooms at their kindergarten using the Sony Hi-MD MZ-RH1 digital recorder and the Sony ECM MS907 microphone. The data were digitized at a sampling rate of 44.1 kHz with 16-bit quantization.
+
+                        For narrative speech data collection, the children were asked to tell The Hare and the Tortoise, assisted with picture cards that were presented to them in a fixed order. The speech content was orthographically transcribed in traditional Chinese characters with annotations of paralinguistic sounds and pauses. The corpus statistics are summarized as follows.
+                        </P>
                     <img src="../images/chara.png" alt="">
                     <p><br></p>
-                    <h5 class="text-center">附錄二：特徵標記表</h5>
+                    <h5 class="text-center">表：中研院中文對話語音語料庫統計數據</h5>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">特徵標記</th>
-                                    <th scope="col">標記定義</th>
-                                    <th scope="col">例子</th>
+                                    <th scope="col" style="text-align: center;">項目</th>
+                                    <th scope="col">描述</th>
+                                    <th scope="col">HI</th>
+                                    <th scope="col">NH</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>+attr</td>
-                                    <td>偏正詞語（aspect）</td>
-                                    <td>如：東風(NA2)[+attr]</td>
+                                    <td style="text-align: center;">IPU</td>
+                                    <td></td>
+                                    <td>2,208</td>
+                                    <td>2,727</td>
                                 </tr>
                                 <tr>
-                                    <td>+co</td>
-                                    <td>並列詞語</td>
-                                    <td>如：公卿(NA1)[+co]</td>
+                                    <td rowspan="9" style="vertical-align: middle;text-align: center;">Word</td>
+                                    <td>Lexical words</td>
+                                    <td>5,193(503)</td>
+                                    <td>6,436(559)</td>
                                 </tr>
                                 <tr>
-                                    <td>+poly</td>
-                                    <td>複音詞語</td>
-                                    <td>如：蹻然(VI)[+poly]、熙熙(VI)[+poly]</td>
+                                    <td>1-syllabic words</td>
+                                    <td>3,002(181)</td>
+                                    <td>3,863(205)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+prop</td>
-                                    <td>含專名的詞語</td>
-                                    <td>如：鴻範(NB2)[+prop]</td>
+                                    <td>2-syllabic words</td>
+                                    <td>2,123(276)</td>
+                                    <td>2,484(305)</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>+rd</td>
-                                    <td>連綿詞</td>
-                                    <td>如：蒼庚(NA1)[+rd]、螳蜋(NA1)[+rd]</td>
+                                    <td>3-syllabic words</td>  
+                                    <td>61(40)</td>
+                                    <td>86(46)</td>                                 
                                 </tr>
                                 <tr>
-                                    <td>+others</td>
-                                    <td>其他詞語</td>
-                                    <td>如：鞀鞞鼓(NA2)[+others]</td>
+                                    <td>Others</td>  
+                                    <td>7(6)</td>
+                                    <td>3(3)</td>                                 
                                 </tr>
                                 <tr>
-                                    <td>+nv</td>
-                                    <td>名謂語</td>
-                                    <td>如：民殃(VH1)[+nv]於</td>
+                                    <td>Discourse-related items</td>  
+                                    <td>2,778(42)</td>
+                                    <td>3,695(51)</td>                                 
                                 </tr>
                                 <tr>
-                                    <td>+p1</td>
-                                    <td>合併中插-前</td>
-                                    <td>如：叫不(Dc)[+vrd]醒</td>
+                                    <td>Discourse particles</td>  
+                                    <td>75(14)</td>
+                                    <td>52(16)</td>                                 
                                 </tr>
                                 <tr>
-                                    <td>+p2</td>
-                                    <td>合併中插-後</td>
-                                    <td>如：共明弓矢(NA2)[+p2]</td>
+                                    <td>Discourse markers</td>  
+                                    <td>21(4)</td>
+                                    <td>53(8)</td>                                 
                                 </tr>
                                 <tr>
-                                    <td>+jj</td>
-                                    <td>假借字</td>
-                                    <td>如：公用享(VH1)[+jj]于天子</td>
+                                    <td>Fillers</td>
+                                    <td>56(8)</td>
+                                    <td>214(11)</td>                                    
                                 </tr>
                                 <tr>
-                                    <td>+on</td>
-                                    <td>其他詞類作名詞</td>
-                                    <td>如：君其將以為戮(NA1)[+on]</td>
+                                    <td rowspan="13" style="vertical-align: middle;text-align: center;">POS</td>
+                                    <td>Verbs</td>
+                                    <td>1,612(252,16)</td>
+                                    <td>1,857(287,16)</td> 
+            
                                 </tr>
+                                <tr>
+                                    <td>Adverbs</td>  
+                                    <td>1,038(71,6)</td>
+                                    <td>1,388(75,6)</td>                                  
+                                </tr>
+                                <tr>
+                                    <td>Nouns</td>  
+                                    <td>1,209(135,7)</td>
+                                    <td>1,254(148,7)</td>                                  
+                                </tr>
+                                <tr>
+                                    <td>Pronouns</td>
+                                    <td>334(10,1)</td>
+                                    <td>650(11,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Determinatives</td> 
+                                    <td>251(25,5)</td>
+                                    <td>344(28,5)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Preposition</td>
+                                    <td>155(15,1)</td>
+                                    <td>241(20,1)</td>                                   
+                                </tr>
+                                <tr>
+                                    <td>Conjunctions</td>
+                                    <td>79(15,4)</td>
+                                    <td>92(15,4)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Structural particles DE</td>
+                                    <td>131(2,1)</td>
+                                    <td>107(2,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Classifiers</td>
+                                    <td>163(7,1)</td>
+                                    <td>239(8,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Particles</td>
+                                    <td>170(10,1)</td>
+                                    <td>183(10,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Adjectives</td>
+                                    <td>2(1,1)</td>
+                                    <td>2(1,1)</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Interjection</td>
+                                    <td>0</td>
+                                    <td>0</td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Copula</td>   
+                                    <td>49(1,1)</td>
+                                    <td>72(2,1)</td>                                 
+                                </tr>
+                                
+                                <tr>
+                                    <td style="text-align: center;">Character</td>
+                                    <td></td>
+                                    <td>7,467(378)</td>
+                                    <td>9,102(408)</td> 
+            
+                                </tr>
+                                <tr>
+                                    <td rowspan="2" style="vertical-align: middle;text-align: center">Syllable</td>
+                                    <td>Tone-distinctive</td>
+                                    <td>311</td>
+                                    <td>349</td> 
+            
+                                </tr>
+                                <tr>
+                                    <td>No tone distinction</td>
+                                    <td>215</td>
+                                    <td>236</td>    
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Phoneme</td>
+                                    <td></td>
+                                    <td>17,046</td>
+                                    <td>21,022</td>
+     
+                                </tr>                              
                             <tbody>
                         </table>
                     </div>

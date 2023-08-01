@@ -30,57 +30,41 @@
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <ul class="list-unstyled content">
-                    <li class="mb-1 position-relative">
-                        <div>
-                            <label class="form-check-label pe-4">
-                                <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="1"> <span>Sinica Taiwan Mandarin Conversational Corpus</span>
-                            </label>
-                            <button class="btn btn-toggle align-items-center rounded py-0 position-absolute end-0 collapsed" data-bs-toggle="collapse" data-bs-target="#one-collapse" aria-expanded="false"> 
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                        </div>
-                        <div class="ms-4 collapse" id="one-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                                <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Conversational Dialogue Corpus(MCDC8)</span></label></li>
-                                <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Conversational Dialogue Corpus(MCDC22)</span></label></li>
-                                <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Topic-oriented Conversation Corpus(MTCC)</span></label></li>
-                                <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Map Task Corpus(MMTC)</span></label></li>
-                            </ul>
-                        </div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Home
+                        </a>
+                        <ul class="dropdown-menu p-0 rounded-0">
+                            <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
+                            <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Licensing info</a></li>
+                        </ul>
                     </li>
-                    <li class="mb-1 position-relative">
-                        <div>
-                            <label class="form-check-label pe-4">
-                                <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="2"> <span>Sinica Sociophonetic Corpus</span>
-                            </label>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/search_en{% else %}/signin_en{% endif %}">Search</a>
                     </li>
-                    <li class="mb-1 position-relative">
-                        <div>
-                            <label class="form-check-label pe-4">
-                                <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="3"> <span>Sinica Child Speech Corpus</span>
-                            </label>
-                            <button class="btn btn-toggle align-items-center rounded py-0 position-absolute end-0 collapsed" data-bs-toggle="collapse" data-bs-target="#four-collapse" aria-expanded="false"> 
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                        </div>
-                        <div class="ms-4 collapse" id="four-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                                <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>The Hare and the Tortoise (NH)</span></label></li>
-                                <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>The Hare and the Tortoise (HI)</span></label></li>
-                            </ul>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% if 'login' in request.session %}/resources_en{% else %}/signin_en{% endif %}">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/guide_en">Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/copyright_en">Copyright</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="/search2_ch">Chinese</a>
                     </li>
                 </ul>
                 <!-- account nav -->
                 {% if has_session %}
                 <ul class="navbar-nav flex-grow-1 nav-account">
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                        <a class="nav-link py-1" href="/account_en">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                        <a class="nav-link py-1" href="#" onclick="logout()">Logout</a>
                     </li>
                 </ul> 
                 {% endif %}
@@ -103,7 +87,7 @@
                         <li class="mb-1 position-relative">
                             <div>
                                 <label class="form-check-label pe-4">
-                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="1"> <span>現代漢語主題對話語音語料庫</span>
+                                    <input class="form-check-input" type="radio" name="bookAlls"  autocomplete="off" value="1"   onchange="updateSelectedOption(this)" id="option1" checked> <span>Sinica Taiwan Mandarin Conversational Corpus</span>
                                 </label>
                                 <button class="btn btn-toggle align-items-center rounded py-0 position-absolute end-0 collapsed" data-bs-toggle="collapse" data-bs-target="#one-collapse" aria-expanded="false"> 
                                     <i class="bi bi-chevron-right"></i>
@@ -111,24 +95,24 @@
                             </div>
                             <div class="ms-4 collapse" id="one-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Topic-oriented Conversation Corpus</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Conversational Dialogue Corpus(一)</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Conversational Dialogue Corpus(二)</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>Mandarin Map Task Corpus</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="2" onchange="updateCheckOptions(this)" id="checkbox2" checked> <span>Mandarin Conversational Dialogue Corpus (MCDC8)</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="3" onchange="updateCheckOptions(this)" id="checkbox3" checked> <span>Mandarin Conversational Dialogue Corpus (MCDC22)</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="1" onchange="updateCheckOptions(this)" id="checkbox1" checked> <span>Mandarin Topic-oriented Conversational Corpus (MTCC)</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="4" onchange="updateCheckOptions(this)" id="checkbox4" checked> <span>Mandarin Map Task Corpus (MMTC)</span></label></li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1 position-relative">
                             <div>
                                 <label class="form-check-label pe-4">
-                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="2"> <span>Sinica Sociophonetic Corpus</span>
+                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="2" onchange="updateSelectedOption(this)" id="option2"> <span>Sinica Sociophonetic Corpus</span>
                                 </label>
                             </div>
                         </li>
                         <li class="mb-1 position-relative">
                             <div>
                                 <label class="form-check-label pe-4">
-                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="3"> <span>Sinica Child Speech Corpus</span>
+                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="3" onchange="updateSelectedOption(this)" id="option3"> <span>Sinica Child Speech Corpus</span>
                                 </label>
                                 <button class="btn btn-toggle align-items-center rounded py-0 position-absolute end-0 collapsed" data-bs-toggle="collapse" data-bs-target="#four-collapse" aria-expanded="false"> 
                                     <i class="bi bi-chevron-right"></i>
@@ -136,8 +120,8 @@
                             </div>
                             <div class="ms-4 collapse" id="four-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>聽常資料</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value=""> <span>聽損資料</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="5" onchange="updateCheckOptions(this)" id="checkbox5"> <span>The Hare and the Tortoise (NH)</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="6" onchange="updateCheckOptions(this)" id="checkbox6"> <span>The Hare and the Tortoise (HI)</span></label></li>
                                 </ul>
                             </div>
                         </li>
@@ -151,7 +135,7 @@
                             <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2, '.literature')">L</button>
                         </div>
                         <div class="col-4 text-end">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas">CLOSE</button>
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" onclick="navigateToPage()">OK</button>
                         </div>
                     </div>
                 </div>

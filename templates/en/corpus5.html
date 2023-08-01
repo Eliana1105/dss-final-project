@@ -31,13 +31,13 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle py-1 active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Home
                         </a>
                         <ul class="dropdown-menu p-0 rounded-0">
                             <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
                             <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
-                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Licensing info</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -53,24 +53,23 @@
                         <a class="nav-link py-1" href="/copyright_en">Copyright</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/corpus5_ch">中文</a>
+                        <a class="nav-link py-1" href="/corpus5_ch">Chinese</a>
                     </li>
                 </ul>
                 <!-- account nav -->
                 {% if has_session %}
                 <ul class="navbar-nav flex-grow-1 nav-account">
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                        <a class="nav-link py-1" href="/account_en">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                        <a class="nav-link py-1" href="#" onclick="logout()">Logout</a>
                     </li>
                 </ul> 
                 {% endif %}
             </div>
         </div>
     </header>
-
     <main class="container p-0 px-2 bg-white bg-opacity-75">
         <div class="row gx-3 gy-2">
             <div class="col-12 ms-sm-auto px-lg-4 px-md-2">

@@ -31,13 +31,13 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle py-1 active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Home
                         </a>
                         <ul class="dropdown-menu p-0 rounded-0">
                             <li><a class="dropdown-item" href="/corpus_list_en">List of corpora</a></li>
                             <li><a class="dropdown-item" href="/corpus_process_en">Data processing</a></li>
-                            <li><a class="dropdown-item" href="/corpus_resource_en">Resources</a></li>
+                            <li><a class="dropdown-item" href="/corpus_resource_en">Licensing info</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -53,17 +53,17 @@
                         <a class="nav-link py-1" href="/copyright_en">Copyright</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/corpus_list_ch">中文</a>
+                        <a class="nav-link py-1" href="/corpus_list_ch">Chinese</a>
                     </li>
                 </ul>
                 <!-- account nav -->
                 {% if has_session %}
                 <ul class="navbar-nav flex-grow-1 nav-account">
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="/account_en">帳號</a>
+                        <a class="nav-link py-1" href="/account_en">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="#" onclick="logout()">登出</a>
+                        <a class="nav-link py-1" href="#" onclick="logout()">Logout</a>
                     </li>
                 </ul> 
                 {% endif %}
@@ -75,7 +75,7 @@
         <div class="row gx-3 gy-2">
             <div class="col-12 ms-sm-auto px-lg-4 px-md-2">
                 <div class="position-relative my-3">
-                    <h1 class="title"><span class="px-3">Home - List of corpora</span></h1>
+                    <h1 class="title"><span class="px-3">HOME - LIST OF CORPORA</span></h1>
                 </div>
 
                 <div class="font-sizing d-block text-end pb-2">
@@ -83,14 +83,14 @@
                     <button type="button" class="size1 btn btn-outline-secondary active" onclick="fontSize(1)">M</button>
                     <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2)">L</button>
                 </div>
-
+                
                 <div class="content pb-5 mb-5">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="card my-2">
                                 <div class="card-body">
-                                    <h5 class="card-title"><strong>Mandarin Topic-oriented Conversation Corpus</strong></h5>
-                                    <p class="card-text">簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明</p>
+                                    <h5 class="card-title"><strong>Sinica Taiwan Mandarin Conversational Corpus</strong></h5>
+                                    <p class="card-text">The 43-hour Sinica Taiwan Mandarin Conversational Corpus (TMC Corpus) consists of 30 free conversations between strangers (MCDC8 and MCDC22) and 29 topic-specific and 26 Map Task conversations (MTCC and MMTC) between people acquainted with each other, each an average length of one hour, 20 minutes, and 10 minutes, respectively.</p>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                         <a href="/corpus1_en" class="btn btn-primary btn-sm">MORE</a>
                                     </div>
@@ -100,8 +100,8 @@
                         <div class="col-lg-6">
                             <div class="card my-2">
                                 <div class="card-body">
-                                    <h5 class="card-title"><strong>Mandarin Conversational Dialogue Corpus</strong></h5>
-                                    <p class="card-text">簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明</p>
+                                    <h5 class="card-title"><strong>Sinica Sociophonetic Corpus</strong></h5>
+                                    <p class="card-text">「The Sinica Sociophonetic Corpus was funded by the National Digital Archives Project. The purpose of this corpus project was to document and archive the contemporary use of spoken Taiwan Mandarin. Recording was conducted in twelve regions distributed across northern, middle, and southern Taiwan, including Yilan County, Taoyuan County, Hsinchu County, Taichung City, Nantou County, Yunlin County, Chiayi City, Changhua County, Tainan City, Kaohsiung City, Kaoshiung County, and Taipei City. </p>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                         <a href="/corpus2_en" class="btn btn-primary btn-sm">MORE</a>
                                     </div>
@@ -111,32 +111,10 @@
                         <div class="col-lg-6">
                             <div class="card my-2">
                                 <div class="card-body">
-                                    <h5 class="card-title"><strong>Mandarin Map Task Corpus</strong></h5>
-                                    <p class="card-text">簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明</p>
+                                    <h5 class="card-title"><strong>Sinica Child Speech Corpus</strong></h5>
+                                    <p class="card-text">The Sinica Child Speech Corpus was funded by the National Science Council and the Children’s Hearing Foundation. It contains repetitive and narrative speech data produced by seventy-nine preschool children with normal hearing (NH) aged 2;11~6;3 (median 5;0) and forty-five children with hearing impairment (HI) aged 3;3~12;5 (median 5;9). </p>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                         <a href="/corpus3_en" class="btn btn-primary btn-sm">MORE</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card my-2">
-                                <div class="card-body">
-                                    <h5 class="card-title"><strong>Sinica Sociophonetic Corpus</strong></h5>
-                                    <p class="card-text">簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明</p>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <a href="/corpus4_en" class="btn btn-primary btn-sm">MORE</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card my-2">
-                                <div class="card-body">
-                                    <h5 class="card-title"><strong>Sinica Child Speech Corpus</strong></h5>
-                                    <p class="card-text">簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明簡單說明</p>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <a href="/corpus5_en" class="btn btn-primary btn-sm">MORE</a>
                                     </div>
                                 </div>
                             </div>
