@@ -2367,7 +2367,6 @@ def search_MHcorpus(request):
 	pos = 0
 	mode = int(request.POST['mode'])
 	page = int(request.POST['page'])
-	print(page)
 	if(mode==2 or mode==3) :
 		pos = int(request.POST['text_number'])
 	check = json.loads(request.POST['check'])
