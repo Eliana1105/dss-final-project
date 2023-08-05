@@ -86,7 +86,7 @@
                         <li class="mb-1 position-relative">
                             <div>
                                 <label class="form-check-label pe-4">
-                                    <input class="form-check-input" type="radio" name="bookAlls"  autocomplete="off" value="1"   onchange="updateSelectedOption(this)" id="option1" checked> <span>中研院現代漢語對話語音語料庫</span>
+                                    <input class="form-check-input" type="radio" name="bookAlls"  autocomplete="off" value="1"   onchange="updateSelectedOption(this)" id="option1" checked> <span>中研院中文對話語音語料庫</span>
                                 </label>
                                 <button class="btn btn-toggle align-items-center rounded py-0 position-absolute end-0 collapsed" data-bs-toggle="collapse" data-bs-target="#one-collapse" aria-expanded="false"> 
                                     <i class="bi bi-chevron-right"></i>
@@ -94,24 +94,24 @@
                             </div>
                             <div class="ms-4 collapse" id="one-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="2" onchange="updateCheckOptions(this)" id="checkbox2" checked> <span>自由主題對話（一）</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="3" onchange="updateCheckOptions(this)" id="checkbox3" checked> <span>自由主題對話（二）</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="1" onchange="updateCheckOptions(this)" id="checkbox1" checked> <span>特定主題對話</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="4" onchange="updateCheckOptions(this)" id="checkbox4" checked> <span>地圖導引對話</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="2" onchange="updateCheckOptions(this)" id="checkbox2" checked> <span>現代漢語連續口語對話語音語料庫MCDC8</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="3" onchange="updateCheckOptions(this)" id="checkbox3" checked> <span>現代漢語連續口語對話語音語料庫MCDC22</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="4" onchange="updateCheckOptions(this)" id="checkbox1" checked> <span>現代漢語地圖導引口語語音語料庫MMTC</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="1" onchange="updateCheckOptions(this)" id="checkbox4" checked> <span>現代漢語主題對話語音語料庫MTCC</span></label></li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1 position-relative">
                             <div>
                                 <label class="form-check-label pe-4">
-                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="2" onchange="updateSelectedOption(this)" id="option2"> <span>社會語言學問卷語音資料庫</span>
+                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="2" onchange="updateSelectedOption(this)" id="option2"> <span>中研院台灣華語社會語音語料庫</span>
                                 </label>
                             </div>
                         </li>
                         <li class="mb-1 position-relative">
                             <div>
                                 <label class="form-check-label pe-4">
-                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="3" onchange="updateSelectedOption(this)" id="option3"> <span>兒童語音語料庫</span>
+                                    <input class="form-check-input" type="radio" name="bookAlls" autocomplete="off" value="3" onchange="updateSelectedOption(this)" id="option3"> <span>中研院兒童語音語料庫</span>
                                 </label>
                                 <button class="btn btn-toggle align-items-center rounded py-0 position-absolute end-0 collapsed" data-bs-toggle="collapse" data-bs-target="#four-collapse" aria-expanded="false"> 
                                     <i class="bi bi-chevron-right"></i>
@@ -119,8 +119,8 @@
                             </div>
                             <div class="ms-4 collapse" id="four-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="5" onchange="updateCheckOptions(this)" id="checkbox5"> <span>說故事─龜兔賽跑（聽常兒童）</span></label></li>
-                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="6" onchange="updateCheckOptions(this)" id="checkbox6"> <span>說故事─龜兔賽跑（聽損兒童）</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="5" onchange="updateCheckOptions(this)" id="checkbox5"> <span>龜兔賽跑NH</span></label></li>
+                                    <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="6" onchange="updateCheckOptions(this)" id="checkbox6"> <span>龜兔賽跑HI</span></label></li>
                                 </ul>
                             </div>
                         </li>
@@ -411,7 +411,8 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/common.js' %}"></script>
     <script src="{% static 'js/navigateToPage.js' %}"></script>
+    <script src="{% static 'js/search.js' %}"></script>
     <script src="{% static 'js/showPage.js' %}"></script>
-    <script src="{% static 'js/searching1.js' %}"></script>
+    <script src="{% static 'js/searching.js' %}"></script>
 </body>
 </html>

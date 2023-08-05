@@ -103,7 +103,6 @@ function updatePagination(currentPage){
       $('#find_bar').html(find_string);
       var temp = '';
       temp+='<div class="table-cell d-lg-table-cell d-none">編號</div>';
-      temp+='<div class="table-cell d-lg-table-cell d-none">出處<br>(書名/篇名)</div>';
       temp+='<div class="table-cell d-lg-table-cell d-none">對話編號</div>';
       temp+='<div class="table-cell d-lg-table-cell d-none">語者</div>';
       temp+='<div class="table-cell d-lg-table-cell d-none text-start text-result2">內容</div>';
@@ -171,20 +170,20 @@ function updatePagination(currentPage){
     temp+='</p></div>';
     temp+='<div class="table-cell d-table-cell" data-title="語料庫名稱" title="主題語料庫"><p class="my-md-2 my-0">';
     if (data_array[i]['theme']== 'MTCC') {
-      temp +="特定主題對話";
-      mytheme = "特定主題對話"
+      temp +="現代漢語主題對話語音語料庫 MTCC";
+      mytheme = "現代漢語主題對話語音語料庫 MTCC"
     }
     else if ( data_array[i]['theme']=='MCDC_8'){
-      temp +="自由主題對話(一)";
-      mytheme = "自由主題對話(一)"
+      temp +="現代漢語連續口語對話語音語料庫 MCDC8";
+      mytheme = "現代漢語連續口語對話語音語料庫 MCDC8"
     }
     else if ( data_array[i]['theme']=='MCDC_22'){
-      temp +="自由主題對話(二)";
-      mytheme = "自由主題對話(二)"
+      temp +="現代漢語連續口語對話語音語料庫 MCDC22";
+      mytheme = "現代漢語連續口語對話語音語料庫 MCDC22"
     }
     else{
-      mytheme = "地圖導引對話"
-      temp +="地圖導引對話";
+      mytheme = "現代漢語地圖導引口語語音語料庫 MMTC"
+      temp +="現代漢語地圖導引口語語音語料庫 MMTC";
     }
     temp+='</p></div>';
     temp+='<div class="table-cell d-table-cell" data-title="對話編號"><p class="my-md-2 my-0">';
@@ -205,8 +204,6 @@ function updatePagination(currentPage){
     temp +='/'
     temp +=data_array[i]['talk_id']
     temp +='</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><br><div class="content">'
-    temp +='<div class="table-cell d-lg-table-cell d-none text-talk">語者</div>'
-    temp +='<div class="table-cell d-lg-table-cell d-none text-start text-result">內容</div>'
     var sub_content =  data_array[i]['sub_content'];
     for (var j = 0; j < sub_content.length; j++){
       if(sub_content[j]['speaker'] == 'A'){

@@ -62,6 +62,8 @@ class Content_conversation :
         self.pinyin = 0
         self.word=""
         self.speaker =""
+        self.start_ipu=0
+        self.end_ipu=0
     def to_json(self):
         return {
             'speaker': self.speaker,
@@ -2236,7 +2238,7 @@ def search_corpus(request) :
 			data.ipuend = row[1]
 			data.ipu = row[2]
 			data.filename = row[3]
-			data.theme = "社會語言學問卷語音資料庫"
+			data.theme = "中研院台灣華語社會語音語料庫"
 			if(start_id != row[3]) :
 				start_id = row[3]
 				temp2.append(temp)
@@ -2250,9 +2252,9 @@ def search_corpus(request) :
 			data.ipu = row[2]
 			data.filename = row[3]
 			if(row[4] == 'Child_NH') :
-				data.theme = "說故事─龜兔賽跑（聽常兒童）"
+				data.theme = "龜兔賽跑NH"
 			else:
-				data.theme = "說故事─龜兔賽跑（聽損兒童）"
+				data.theme = "龜兔賽跑HI"
 			if(start_id != row[3]) :
 				start_id = row[3]
 				temp2.append(temp)
@@ -2394,7 +2396,7 @@ def search_MHcorpus(request):
 			temp_sql+="Modern_Chinese.theme = '%s'"%each
 		else :
 			temp_sql+=" or Modern_Chinese.theme = '%s'"%each
-	sql = "SELECT `IPUStart`,`IPUEnd`,`IPU`,`Word`,`POS`,`Pinyin` ,`FileSn`,Modern_Chinese.Speaker_id   ,Modern_Chinese.theme  FROM `MH_File` JOIN  `Modern_Chinese`  ON Modern_Chinese.id = MH_File.MH_id   WHERE %s ORDER BY `FileSn` ASC , `IPUStart` ASC;"%temp_sql
+	sql = "SELECT `IPUStart`,`IPUEnd`,`IPU`,`Word`,`POS`,`Pinyin` ,`FileSn`,Modern_Chinese.Speaker_id   ,Modern_Chinese.theme  ,Modern_Chinese.Talk_id  FROM `MH_File` JOIN  `Modern_Chinese`  ON Modern_Chinese.id = MH_File.MH_id   WHERE %s ORDER BY `FileSn` ASC , `IPUStart` ASC;"%temp_sql
 	cursor.execute(sql)
 	results = cursor.fetchall()
 	temp=[]
@@ -2420,7 +2422,7 @@ def search_MHcorpus(request):
 			#變更下一段對話編號
 			my_conversation = Conversation()
 			my_conversation.content_array = temp
-			my_conversation.talk_id = Talk_id
+			my_conversation.talk_id = each[9]
 			my_conversation.theme = theme
 			Talk_id = each[6]
 			temp2.append(my_conversation)
@@ -2522,7 +2524,6 @@ def search_MHcorpus(request):
 										except :
 											is_matched = False
 				if(is_matched) :
-					text_count = 20
 					start_time = content_data[index].start_time
 					temp = []
 					temp2 = []
@@ -2530,9 +2531,8 @@ def search_MHcorpus(request):
 					for i in range(index-1 , 0 , -1) :
 						#保持在第一位
 						temp.insert(0,content_data[i])
-						if(text_count - len(content_data[i].ipu) < 0) :
-							break
-						text_count = text_count - len(content_data[i].ipu)
+						break
+
 					#抓取前一分鐘的字
 					for i in range(index-1 , 0 , -1) :
 						temp2.insert(0,content_data[i])                  
@@ -2550,9 +2550,7 @@ def search_MHcorpus(request):
 					#抓取後20個字
 					for i in range(index+1 , len(content_data)) :
 						temp.append(content_data[i])
-						if(text_count - len(content_data[i].ipu) < 0) :
-							break
-						text_count = text_count - len(content_data[i].ipu)
+						break
 					my_conversation = Conversation()
 					my_conversation.content_array = temp
 					my_conversation.sub_content_array = temp2
@@ -2617,6 +2615,8 @@ def search_MHcorpus(request):
 						keyword_pinyin_pos = get_chinese_index(row.ipu.find(my_keyword),row.ipu)
 						pinyin = row.pinyin.split(" ")
 						pinyin = pinyin[0:keyword_pinyin_pos]
+						row.start_ipu = index
+						row.end_ipu = index
 						if(find_pos):
 							front_word = row.word[0:row.word.find(my_keyword)].split(" ")							
 							front_word = merge_continuous_english_words(front_word)
@@ -2664,9 +2664,9 @@ def search_MHcorpus(request):
 									if(contain_digital(pinyin[q])) :
 										text_count2-=1                        
 						for i in range(index-1 , -1 , -1) :
-
 							if(text_count == 0) :
 								break
+							row.start_ipu -=1
 							if(mode==2) :
 								if(content_data[i].speaker != row.speaker):
 									continue
@@ -2744,9 +2744,9 @@ def search_MHcorpus(request):
 									if(contain_digital(pinyin[q])) :
 										text_count2-=1                               
 						for i in range(index+1 , len(content_data)) :
-							
 							if(text_count == 0) :
 								break
+							row.end_ipu +=1
 							if(mode==2) :
 								if(content_data[i].speaker != row.speaker):
 									continue
@@ -2989,19 +2989,19 @@ def search_MHcorpus(request):
 
 				if(is_matched) :
 
-					text_count = 20
 					start_time = content_data[index].start_time
 					temp = []
-					temp2 = []
-					
-
+					temp2 = []					
+					content_data[index].start_ipu-=2
+					content_data[index].end_ipu +=2
+					if content_data[index].start_ipu<0 :
+						content_data[index].start_ipu =0
+					if content_data[index].end_ipu> len(content_data) :
+						content_data[index].end_ipu = len(content_data)
 					#抓取前20個字
-					for i in range(index-1 , 0 , -1) :
+					for i in range(index-1 , content_data[index].start_ipu , -1) :
 						#保持在第一位
 						temp.insert(0,content_data[i])
-						if(text_count - len(content_data[i].ipu) < 0) :
-							break
-						text_count = text_count - len(content_data[i].ipu)
 					#抓取前一分鐘的字
 					for i in range(index-1 , 0 , -1) :
 						temp2.insert(0,content_data[i])                  
@@ -3010,18 +3010,14 @@ def search_MHcorpus(request):
 					#保留初始數據
 					temp.append(content_data[index])
 					temp2.append(content_data[index])
-					text_count = 20
 					#抓取後一分鐘的字
 					for i in range(index+1 , len(content_data)) :
 						temp2.append(content_data[i])
 						if(content_data[i].start_time - start_time >60) :
 							break
 					#抓取後20個字
-					for i in range(index+1 , len(content_data)) :
+					for i in range(index+1 ,content_data[index].end_ipu ) :
 						temp.append(content_data[i])
-						if(text_count - len(content_data[i].ipu) < 0) :
-							break
-						text_count = text_count - len(content_data[i].ipu)
 					my_conversation = Conversation()
 					my_conversation.content_array = temp
 					my_conversation.sub_content_array = temp2

@@ -84,7 +84,6 @@ function updatePagination(currentPage){
             $('#find_bar').html(find_string);            
             var temp = '';
             temp+='<div class="table-cell d-lg-table-cell d-none">編號</div>';
-            temp+='<div class="table-cell d-lg-table-cell d-none">出處<br>(書名/篇名)</div>';
             temp+='<div class="table-cell d-lg-table-cell d-none">音檔編號</div>';
             temp+='<div class="table-cell d-lg-table-cell d-none text-start text-result2">內容</div>';
             $('#search_header').html(temp);
@@ -171,7 +170,6 @@ function updatePagination(currentPage){
                 temp +='/'
                 temp +=data_array[i]['filename']
                 temp +='</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><br><div class="content">'
-                temp +='<div class="table-cell d-lg-table-cell d-none text-start text-result">內容</div>'
                 var sub_content =  data_array[i]['sub_content'];
                 for (var j = 0; j < sub_content.length; j++){
                 temp+='<div class="table-cell text-start text-results" data-title="內容">';
