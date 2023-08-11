@@ -97,3 +97,35 @@ function navigateToPage() {
 
 
   
+function navigateToPage_en() {
+  var selectedOption = document.querySelector('input[name="bookAlls"]:checked');
+  var currentPageURL = window.location.href;
+  currentPageURL=currentPageURL.split('/')
+  currentPageName= currentPageURL.pop()
+  if(!currentPageName){
+    currentPageName= currentPageURL.pop()
+  }
+  console.log(currentPageName)
+  if (selectedOption) {
+    console.log('選中的選項：', selectedOption.value);
+    if (selectedOption.value === '1') {
+      if(currentPageName !='search_en')
+      {
+        document.location.href = "/search_en";
+      }
+    } 
+    else {
+      if(currentPageName !='search2_en')
+      {
+       document.location.href = "/search2_en";
+      }
+    }
+  } else {
+    console.log('Please select an option');
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  // 取得所選選項的元素
+  localStorage.removeItem('selectedOption');
+  localStorage.removeItem('CheckOptions');
+});

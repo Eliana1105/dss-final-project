@@ -99,7 +99,6 @@
                                     <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="3" onchange="updateCheckOptions(this)" id="checkbox3" checked> <span>Mandarin Conversational Dialogue Corpus (MCDC22)</span></label></li>
                                     <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="4" onchange="updateCheckOptions(this)" id="checkbox4" checked> <span>Mandarin Map Task Corpus (MMTC)</span></label></li>
                                     <li><label class="form-check-label pe-4"><input class="form-check-input" type="checkbox" name="book[]" autocomplete="off" value="1" onchange="updateCheckOptions(this)" id="checkbox1" checked> <span>Mandarin Topic-oriented Conversational Corpus (MTCC)</span></label></li>
-                                    
                                 </ul>
                             </div>
                         </li>
@@ -136,7 +135,7 @@
                             <button type="button" class="size2 btn btn-outline-secondary" onclick="fontSize(2, '.literature')">L</button>
                         </div>
                         <div class="col-4 text-end">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" onclick="navigateToPage()">OK</button>
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" onclick="navigateToPage_en()">OK</button>
                         </div>
                     </div>
                 </div>
@@ -160,38 +159,24 @@
                         </button>
                     </div>
                     <div id="collapseSearch" class="card-body p-2 accordion-collapse collapse show">
-                        <div>
-                            <div class="p-0 col-12 d-block text-center table-rows table-rows--search">
-                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1">
+                            <div class="p-0 col-12 d-block text-center table-rows table-rows--search table-rows--search2">
+                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 w-100">
                                     <div class="table-cell d-table-cell" data-title="&nbsp;">&nbsp;</div>
-                                    <div class="table-cell d-table-cell" data-title="Character/Pinyin">
-                                        <input type="text" class="form-control" autocomplete="off" value="">
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="詞類">
-                                        <select class="form-select" autocomplete="off">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="&nbsp;">
-                                        <label><input type="radio" name="character" class="form-check-input" autocomplete="off" value=""> IPU-internal</label>
-                                        <label><input type="radio" name="character" class="form-check-input" autocomplete="off" value=""> N-character interval</label>
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="&nbsp;">
-                                        <div class="w-50 float-start">
-                                            <input type="text" class="form-control" autocomplete="off" value="">
-                                        </div>
-                                        <div class="w-50 float-start">
-                                            <span>字內  出現</span>
-                                        </div>
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="Character/Pinyin">
-                                        <input type="text" class="form-control" autocomplete="off" value="">
+                                    <div class="table-cell d-table-cell text-main" data-title="Character/Pinyin">
+                                        <input type="text" class="form-control text-main-character"  id="main_character" autocomplete="off" value="">
                                     </div>
                                     <div class="table-cell d-table-cell form-features" data-title="&nbsp;">
                                         <a href="javascript:void(0);" onclick="conditionChange(2, this)"><i class="bi bi-plus-circle-fill fs-3"></i></a>
                                     </div>
                                 </div>
-                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1">
+                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 w-100 form-pos">
+                                    <div class="table-cell d-table-cell" data-title="&nbsp;">&nbsp;</div>
+                                    <div class="table-cell d-table-cell text-start text-adjacent" data-title="&nbsp;">
+                                        <label class="d-flex align-items-center"><input type="radio" name="character0" class="form-check-input m-1" autocomplete="off" value="1" checked> IPU-internal (single speaker)</label>
+                                        <label class="d-flex align-items-center"><input type="radio" name="character0" class="form-check-input m-1" autocomplete="off" value="2"> N-character interval within<input type="text" id="number" class="form-control d-inline-block text-center mx-1 text-n-character" autocomplete="off" value="" disabled> words (single speaker)</label>
+                                    </div>
+                                </div>
+                                <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 table-rows--body-sub w-100">
                                     <div class="table-cell d-table-cell" data-title="&nbsp;">
                                         <select class="form-select" autocomplete="off">
                                             <option value="and">AND</option>
@@ -199,28 +184,8 @@
                                             <option value="not">NOT</option>
                                         </select>
                                     </div>
-                                    <div class="table-cell d-table-cell" data-title="Character/Pinyin">
-                                        <input type="text" class="form-control keyword" autocomplete="off" value="">
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="詞類">
-                                        <select class="form-select" autocomplete="off">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="&nbsp;">
-                                        <label><input type="radio" name="character" class="form-check-input" autocomplete="off" value=""> IPU-internal</label>
-                                        <label><input type="radio" name="character" class="form-check-input" autocomplete="off" value=""> N-character interval</label>
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="&nbsp;">
-                                        <div class="w-50 float-start">
-                                            <input type="text" class="form-control" autocomplete="off" value="">
-                                        </div>
-                                        <div class="w-50 float-start">
-                                            <span>字內  出現</span>
-                                        </div>
-                                    </div>
-                                    <div class="table-cell d-table-cell" data-title="Character/Pinyin">
-                                        <input type="text" class="form-control" autocomplete="off" value="">
+                                    <div class="table-cell d-table-cell text-main" data-title="Character/Pinyin">
+                                        <input type="text" class="form-control text-main-character input_character" autocomplete="off" value="">
                                     </div>
                                     <div class="table-cell d-table-cell form-features" data-title="&nbsp;">
                                         <a href="javascript:void(0);" onclick="conditionChange(1, this)"><i class="bi bi-dash-circle-fill fs-3"></i></a>
@@ -230,13 +195,12 @@
                         </div>
                         <div class="card-footer bg-transparent p-2 fs-6">
                             <div class="col-12 d-flex justify-content-center py-2">
-                                <button class="btn btn-primary px-4 mx-3" type="reset">Clear</button>
-                                <button class="btn btn-primary px-4 mx-3" type="submit">Search</button>
+                                <button class="btn btn-primary px-4 mx-3" type="reset" onclick="clean()">Clear</button>
+                                <button class="btn btn-primary px-4 mx-3" type="submit" onclick="searching_en()">Search</button>
                             </div>
                         </div>
-                    </div>
                     <!-- 搜尋條件樣版 -->
-                    <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 search-condition-tmpl d-lg-none d-none">
+                    <div class="table-row table-rows--body d-lg-table d-flex flex-wrap py-md-1 search-condition-tmpl d-lg-none d-none table-rows--body-sub w-100">
                         <div class="table-cell d-table-cell" data-title="&nbsp;">
                             <select class="form-select" autocomplete="off">
                                 <option value="and">AND</option>
@@ -244,28 +208,8 @@
                                 <option value="not">NOT</option>
                             </select>
                         </div>
-                        <div class="table-cell d-table-cell" data-title="Character/Pinyin">
-                            <input type="text" class="form-control keyword" autocomplete="off" value="">
-                        </div>
-                        <div class="table-cell d-table-cell" data-title="詞類">
-                            <select class="form-select" autocomplete="off">
-                                <option></option>
-                            </select>
-                        </div>
-                        <div class="table-cell d-table-cell" data-title="&nbsp;">
-                            <label><input type="radio" name="character" class="form-check-input" autocomplete="off" value=""> IPU-internal</label>
-                            <label><input type="radio" name="character" class="form-check-input" autocomplete="off" value=""> N-character interval</label>
-                        </div>
-                        <div class="table-cell d-table-cell" data-title="&nbsp;">
-                            <div class="w-50 float-start">
-                                <input type="text" class="form-control" autocomplete="off" value="">
-                            </div>
-                            <div class="w-50 float-start">
-                                <span>字內  出現</span>
-                            </div>
-                        </div>
-                        <div class="table-cell d-table-cell" data-title="Character/Pinyin">
-                            <input type="text" class="form-control" autocomplete="off" value="">
+                        <div class="table-cell d-table-cell text-main" data-title="Character/Pinyin">
+                            <input type="text" class="form-control text-main-character input_character" autocomplete="off" value="">
                         </div>
                         <div class="table-cell d-table-cell form-features" data-title="&nbsp;">
                             <a href="javascript:void(0);" onclick="conditionChange(1, this)"><i class="bi bi-dash-circle-fill fs-3"></i></a>
@@ -273,87 +217,32 @@
                     </div>
                 </div>
 
-                <div id="searchScope" class="alert px-2 py-1" role="alert">
-                    <p class="m-2"><strong>找到 100 筆 / 總共 1,000 筆。</strong></p>
-                </div>
-                <div class="text-muted fs-6 mx-3 mb-3 d-flex flex-lg-row flex-column justify-content-end text-end">
-                    <div><a class="badge bg-primary text-light text-decoration-none" href="javascript:void(0);"><i class="bi bi-file-earmark-arrow-up"></i> Export</a></div>
+                <div id="find_bar">
                 </div>
 
-                <nav>
-                    <ul class="pagination flex-wrap justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-                        </li>
-                    </ul>
+                <div class="text-muted fs-6 mx-3 mb-3 d-flex flex-lg-row flex-column justify-content-end text-end" id="search_export">
+                    
+                </div>
+
+                <nav id ="Pagination1">
                 </nav>
 
                 <div id="searchResult" class="content pb-2">
                     <div class="mb-4 p-0 col-12 d-lg-table d-block text-center table-rows table-rows--result">
-                        <div class="table-row table-rows--header py-3 d-flex align-items-center">
-                            <div class="table-cell d-lg-table-cell d-none">SNO.</div>
-                            <div class="table-cell d-lg-table-cell d-none">出處(書名/篇名)</div>
-                            <div class="table-cell d-lg-table-cell d-none">音檔編號</div>
-                            <div class="table-cell d-lg-table-cell d-none text-start text-result2">內容</div>
-                            <div class="table-cell d-lg-table-cell d-none text-select">選取</div>
+                        <div class="table-row table-rows--header py-3 d-flex align-items-center" id="search_header">
                         </div>
-                        <div class="table-row table-rows--body d-flex py-1 flex-wrap align-items-center">
-                            <div class="table-cell d-table-cell" data-title="SNO.">1</div>
-                            <div class="table-cell d-table-cell" data-title="語料庫名稱" title="社會語音">社會語音</div>
-                            <div class="table-cell d-table-cell" data-title="音檔編號" title="Mtcc-01-01">Mtcc-01-01</div>
-                            <div class="table-cell d-table-cell text-start text-result2" data-title="內容">
-                                <p class="my-2">FILLER <span class="bg-primary text-white">國語</span> 就是中文台語然後英語</p>
-                            </div>
-                            <div class="table-cell d-table-cell text-select" data-title="選取">
-                                <input type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="table-row table-rows--body d-flex py-1 flex-wrap align-items-center">
-                            <div class="table-cell d-table-cell" data-title="SNO.">2</div>
-                            <div class="table-cell d-table-cell" data-title="語料庫名稱" title="社會語音">社會語音</div>
-                            <div class="table-cell d-table-cell" data-title="音檔編號" title="Mtcc-01-02">Mtcc-01-02</div>
-                            <div class="table-cell d-table-cell text-start text-result2" data-title="內容">
-                                <p class="my-2"> <span class="bg-primary text-white">國語</span> </p>
-                            </div>
-                            <div class="table-cell d-table-cell text-select" data-title="選取">
-                                <input type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="table-row table-rows--body d-flex py-1 flex-wrap align-items-center">
-                            <div class="table-cell d-table-cell" data-title="SNO.">3</div>
-                            <div class="table-cell d-table-cell" data-title="語料庫名稱" title="社會語音">社會語音</div>
-                            <div class="table-cell d-table-cell" data-title="音檔編號" title="Mtcc-01-03">Mtcc-01-03</div>
-                            <div class="table-cell d-table-cell text-start text-result2" data-title="內容">
-                                <p class="my-2">FILLER <span class="bg-primary text-white">國語</span></p>
-                            </div>
-                            <div class="table-cell d-table-cell text-select" data-title="選取">
-                                <input type="checkbox" value="">
-                            </div>
+                        <div id="search_content">
+
                         </div>
                     </div>
                 </div>
 
-                <nav class="pb-4">
-                    <ul class="pagination flex-wrap justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-                        </li>
-                    </ul>
+                <nav id="Pagination2">
                 </nav>
             </div>
         </div>
+
+
     </main>
     
     <footer class="footer mt-auto px-lg-5 px-2">
@@ -364,6 +253,9 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/common.js' %}"></script>
     <script src="{% static 'js/search.js' %}"></script>
+    <script src="{% static 'js/searching3.js' %}"></script>
+    <script src="{% static 'js/logout.js' %}"></script>
     <script src="{% static 'js/navigateToPage.js' %}"></script>
+    <script src="{% static 'js/showPage.js' %}"></script>
 </body>
 </html>

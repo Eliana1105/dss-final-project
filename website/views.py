@@ -213,9 +213,6 @@ def splice(total_word,splice_word,pinyin) :
     ret = ret[pre_num:len(ret)-post_num]
     ret = ' '.join(ret)
     return ret
-
-
-
 @csrf_protect
 def index(request):
 	response = render(request,'index.html',{})
@@ -240,7 +237,6 @@ def corpus_list_ch(request):
 	response['X-Content-Type-Options'] = 'nosniff'
 	response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
 	return response
-
 @csrf_protect
 def corpus_list_en(request):
 	has_session = 'login' in request.session
@@ -469,6 +465,15 @@ def corpus5_en(request):
 
 @csrf_protect
 def resources_ch(request):
+	if 'login' not in request.session:
+		response = render(request,'ch/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	has_session = 'login' in request.session
 	context = {
         'has_session': has_session,
@@ -484,6 +489,15 @@ def resources_ch(request):
 
 @csrf_protect
 def resources_en(request):
+	if 'login' not in request.session:
+		response = render(request,'en/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	has_session = 'login' in request.session
 	context = {
         'has_session': has_session,
@@ -499,6 +513,15 @@ def resources_en(request):
 
 @csrf_protect
 def search_ch(request):
+	if 'login' not in request.session:
+		response = render(request,'ch/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	has_session = True
 	context = {
         'has_session': has_session,
@@ -514,6 +537,15 @@ def search_ch(request):
 
 @csrf_protect
 def search_en(request):
+	if 'login' not in request.session:
+		response = render(request,'en/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	has_session = 'login' in request.session
 	context = {
         'has_session': has_session,
@@ -529,6 +561,15 @@ def search_en(request):
 
 @csrf_protect
 def search2_ch(request):
+	if 'login' not in request.session:
+		response = render(request,'ch/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	has_session = 'login' in request.session
 	context = {
         'has_session': has_session,
@@ -544,6 +585,15 @@ def search2_ch(request):
 
 @csrf_protect
 def search2_en(request):
+	if 'login' not in request.session:
+		response = render(request,'en/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	has_session = 'login' in request.session
 	context = {
         'has_session': has_session,
@@ -751,7 +801,14 @@ def backend_index(request):
 @csrf_protect
 def backend_record(request):
 	if 'backend_login' not in request.session:
-		return HttpResponseBadRequest('權限不足，請先登錄')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	response = render(request,'backend/record.html',{})
 	response['Strict-Transport-Security'] = 'max-age=2592000'
 	response['X-Frame-Options'] = 'SAMEORIGIN'
@@ -764,7 +821,14 @@ def backend_record(request):
 @csrf_protect
 def backend_corpus(request):
 	if 'backend_login' not in request.session:
-		return HttpResponseBadRequest('權限不足，請先登錄')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	response = render(request,'backend/corpus.html',{})
 	response['Strict-Transport-Security'] = 'max-age=2592000'
 	response['X-Frame-Options'] = 'SAMEORIGIN'
@@ -777,7 +841,14 @@ def backend_corpus(request):
 @csrf_protect
 def backend_account(request):
 	if 'backend_login' not in request.session:
-		return HttpResponseBadRequest('權限不足，請先登錄')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	response = render(request,'backend/account.html',{})
 	response['Strict-Transport-Security'] = 'max-age=2592000'
 	response['X-Frame-Options'] = 'SAMEORIGIN'
@@ -790,7 +861,14 @@ def backend_account(request):
 @csrf_protect
 def backend_manual(request):
 	if 'backend_login' not in request.session:
-		return HttpResponseBadRequest('權限不足，請先登錄')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	response = render(request,'backend/manual.html',{})
 	response['Strict-Transport-Security'] = 'max-age=2592000'
 	response['X-Frame-Options'] = 'SAMEORIGIN'
@@ -803,7 +881,14 @@ def backend_manual(request):
 @csrf_protect
 def backend_license(request):
 	if 'backend_login' not in request.session:
-		return HttpResponseBadRequest('權限不足，請先登錄')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	response = render(request,'backend/license.html',{})
 	response['Strict-Transport-Security'] = 'max-age=2592000'
 	response['X-Frame-Options'] = 'SAMEORIGIN'
@@ -816,7 +901,14 @@ def backend_license(request):
 @csrf_protect
 def backend_resource(request):
 	if 'backend_login' not in request.session:
-		return HttpResponseBadRequest('權限不足，請先登錄')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	response = render(request,'backend/resource.html',{})
 	response['Strict-Transport-Security'] = 'max-age=2592000'
 	response['X-Frame-Options'] = 'SAMEORIGIN'
@@ -918,7 +1010,14 @@ def backend_logout(request):
 @csrf_exempt
 def backend_download_corpus(request):
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 
 	# 連接資料庫
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
@@ -1080,7 +1179,14 @@ def backend_download_corpus(request):
 @csrf_exempt
 def backend_update_corpus(request):
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 
 	current_datetime = datetime.now()
 	date_string = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -1202,7 +1308,14 @@ def backend_update_corpus(request):
 @csrf_exempt
 def backend_delete_corpus(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1240,7 +1353,14 @@ def backend_delete_corpus(request) :
 @csrf_exempt
 def	backend_Get_user_log(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
 	db = pymysql.connect(host=json_data['db']['host'],
@@ -1292,7 +1412,14 @@ def	backend_Get_user_log(request) :
 @csrf_exempt
 def backend_check_email(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	result = {'status':'','msg':''}
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1334,7 +1461,14 @@ def backend_check_email(request) :
 @csrf_exempt
 def backend_check_account(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	
 	result = {'status':'','msg':''}
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
@@ -1367,7 +1501,14 @@ def backend_check_account(request) :
 @csrf_exempt
 def backend_create_account(request):
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	result = {'status':'','msg':''}
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1452,7 +1593,14 @@ def record(way,account,is_administrator) :
 @csrf_exempt
 def	backend_Get_user(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
 	db = pymysql.connect(host=json_data['db']['host'],
@@ -1485,7 +1633,14 @@ def	backend_Get_user(request) :
 @csrf_exempt
 def	backend_Modify_user(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	result = {'status':'','msg':''}
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1537,7 +1692,14 @@ def	backend_Modify_user(request) :
 @csrf_exempt
 def backend_Delete_user(request):
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	result = {'status':'','msg':'','data':{}}
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1550,6 +1712,7 @@ def backend_Delete_user(request):
 		id = request.POST['id']
 		cursor.execute("DELETE FROM `Member_Log` WHERE Member_id = '%s'"%id)
 		cursor.execute("DELETE FROM `Member` WHERE id = '%s'"%id)
+		cursor.execute("DELETE FROM `User_Log` WHERE `User_id` = '%s'"%id)
 		db.commit()
 		result['status'] = 'Yes'
 	except Exception as e:
@@ -1562,7 +1725,14 @@ def backend_Delete_user(request):
 @csrf_exempt
 def backend_Notice_user(request):
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	result = {'status':'','msg':'','data':{}}
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1606,7 +1776,14 @@ def backend_Notice_user(request):
 @csrf_exempt
 def backend_get_userdata(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	result = {}
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1637,7 +1814,14 @@ def backend_get_userdata(request) :
 @csrf_exempt
 def	backend_get_user_license(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
 	db = pymysql.connect(host=json_data['db']['host'],
@@ -1660,7 +1844,14 @@ def	backend_get_user_license(request) :
 @csrf_exempt
 def backend_update_speaker(request):
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 		# 創建資料庫連接
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1726,7 +1917,14 @@ def backend_update_speaker(request):
 @csrf_exempt
 def backend_download_speaker(request):
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 		# 連接資料庫
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1893,7 +2091,14 @@ def backend_download_speaker(request):
 @csrf_exempt
 def backend_delete_speaker(request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -1920,7 +2125,14 @@ def backend_delete_speaker(request) :
 @csrf_exempt
 def backend_new_resource (request) :
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	
 
 	uploaded_file = request.FILES['file']
@@ -1982,7 +2194,14 @@ def backend_get_resource (request) :
 @csrf_exempt
 def backend_delete_resource (request) :	
 	if 'backend_login' not in request.session:
-		raise PermissionDenied('無效的請求方法')
+			response = render(request,'backend/index.html',{})
+			response['Strict-Transport-Security'] = 'max-age=2592000'
+			response['X-Frame-Options'] = 'SAMEORIGIN'
+			response['Referrer-Policy'] = 'no-referrer'
+			response['X-XSS-Protection'] = '1; mode=block'
+			response['X-Content-Type-Options'] = 'nosniff'
+			response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+			return response
 	id = request.POST.get('id')
 	with open('static/media/link.json', 'r', encoding='utf-16') as file:
 		json_data = json.load(file)
@@ -2069,6 +2288,21 @@ def send_email( subject, body, recipients, attachments=None):
         print("郵件已成功寄出！")
     except Exception as e:
         print("郵件寄送失敗：", str(e))
+@csrf_exempt
+def log_search(request):
+	search_temp = int(json.loads(request.POST['check']))
+	keyword = request.POST['main_value']
+	if search_temp == 1 :
+		record("以 [ %s ] 查詢中研院中文對話語音語料庫"%keyword,request.session['login'],0)
+	elif search_temp==2 :
+		record("以 [ %s ] 查詢中研院台灣華語社會語音語料庫"%keyword,request.session['login'],0)
+	elif search_temp==3:
+		record("以 [ %s ] 查詢中研院兒童語音語料庫"%keyword,request.session['login'],0)
+	result = {'status':'secess','msg':'OK'}
+	return JsonResponse(result, safe=False)
+
+
+
 
 @csrf_exempt
 def download_pdf(request):
@@ -2175,6 +2409,15 @@ def apply_confirm(request) :
 
 @csrf_exempt
 def search_corpus(request) :
+	if 'login' not in request.session:
+		response = render(request,'ch/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	condition_json = request.POST['condition']
 	selected_option = request.POST.get('selected_value')
 	check_options = request.POST.get('checkbox_value')
@@ -2365,6 +2608,15 @@ def search_corpus(request) :
 
 @csrf_exempt
 def search_MHcorpus(request):
+	if 'login' not in request.session:
+		response = render(request,'ch/signin.html',{})
+		response['Strict-Transport-Security'] = 'max-age=2592000'
+		response['X-Frame-Options'] = 'SAMEORIGIN'
+		response['Referrer-Policy'] = 'no-referrer'
+		response['X-XSS-Protection'] = '1; mode=block'
+		response['X-Content-Type-Options'] = 'nosniff'
+		response['Strict-Transport-Security'] = 'max-age=16070400; includeSubDomains'
+		return response
 	main = json.loads(request.POST['main'])
 	pos = 0
 	mode = int(request.POST['mode'])

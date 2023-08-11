@@ -99,5 +99,5 @@ urlpatterns = [
     path('account_detail/', account_detail),
     path('Modify_account/', Modify_account),
     path('Modify_password/', Modify_password),
-
+    path('log_search/', log_search),
 ]
