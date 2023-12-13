@@ -1,42 +1,95 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="minimum-scale=1.0, width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="{% static 'images/ogImg.jpg' %}" />
-    <meta property="og:description" content="中研院中文口語語料庫檢索系統" />
-    <meta name="description" content="中研院中文口語語料庫檢索系統" />
-    <title>中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</title>
-
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>農產品決策支援系統</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <script src="{% static 'js/search2.js' %}"></script>
 </head>
+
 <body>
-    <div class="container">
-        <main>
-            <h1>中央研究院 中文口語語料庫檢索系統 ILAS Chinese Spoken Language Resources</h1>
-            <div class="container menu text-center fadein">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-6">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <a class="nav-link col mx-2" href="/corpus_list_ch" title="中文">中文</a>
-                            <a class="nav-link col mx-2" href="/corpus_list_en" title="English">English</a>
-                        </div>
-                    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <h1>農產品決策支援系統</h1>
+    </header>
+
+    <!-- Content -->
+    <div class="container mt-5">
+        <p style="font-size: 24px; margin-bottom: 20px;">請根據欲種植之環境選擇最適當的選項</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>種植地區
+                        <select class="form-control" id="regionSelect">
+                            <option value="North">北部</option>
+                            <option value="Central">中部</option>
+                            <option value="South">南部</option>
+                            <option value="East">東部</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>環境濕度
+                        <select class="form-control" id="humiditySelect">
+                            <option value="Dry">乾燥</option>
+                            <option value="Moderate">中等</option>
+                            <option value="Moist">濕潤</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>環境溫度
+                        <select class="form-control" id="temperatureSelect">
+                            <option value="10-15">10-15度</option>
+                            <option value="16-27">16-27度</option>
+                            <option value="28-32">28-32度</option>
+                        </select>
+                    </label>
                 </div>
             </div>
-        </main>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>種植季節
+                        <select class="form-control" id="seasonSelect">
+                            <option value="Spring">春天</option>
+                            <option value="Summer">夏天</option>
+                            <option value="Autumn">秋天</option>
+                            <option value="Winter">冬天</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>難易程度
+                        <select class="form-control" id="difficultySelect">
+                            <option value="Easy">簡易</option>
+                            <option value="Moderate">中等</option>
+                            <option value="Difficult">困難</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>灌溉水源
+                        <select class="form-control" id="irrigationSelect">
+                            <option value="Insufficient">不充足</option>
+                            <option value="Moderate">中等</option>
+                            <option value="Adequate">充足</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="search()">查詢</button>
+        </div>
 
-        <footer class="fixed-bottom px-lg-5 px-2">
-            <p class="text-center text-white my-1">Copyright &copy; 中央研究院語言學研究所 Institute of Linguistics, Academia Sinica.</p>
+        <!-- Footer -->
+        <footer id="footer">
+            <p>&copy; 2023 農產品決策支援系統</p>
         </footer>
-    </div>
-
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
+
 </html>

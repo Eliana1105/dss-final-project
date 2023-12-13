@@ -1,7 +1,0 @@
-@charset "UTF-8";
-
-body { background: url(../images/bg.jpg) no-repeat 50% 0; background-size: cover; display: flex; align-items: center; padding-bottom: 40px; }
-
-.form-signin { background-color: #effbff; width: 100%; max-width: 400px; margin: auto; }
-.form-signin h1 { background-color: #9eddf4; box-sizing: content-box; }
-.form-signin h1 > img { max-width: 100%; height: auto; }

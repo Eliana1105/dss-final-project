@@ -54,7 +54,7 @@ footer p { font-size: 0.6rem; }
 #topBtn:before { content: '\25B2'; width: 100%; text-align: center; font-size: 12px; position: absolute; top: 5px; left: 0; }
 #topBtn:hover { background-color: rgba(0,0,0,0.8); }
 
-.text-keyword { color: #ff0000 !important; }
+.text-keyword { color: #0000ff !important; }
 .text-keyword2 { color: #0000ff !important; text-decoration: none; }
 .text-primary { color: #084f93 !important; }
 .col-form-label { padding: .2rem; }

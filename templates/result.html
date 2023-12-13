@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>農產品決策支援系統 - 結果</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="{% static 'css/result.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <h1>農產品決策支援系統</h1>
+    </header>
+
+    <!-- Content -->
+    <div class="container mt-5">
+        <!-- 建議種植果品部分 -->
+        <div class="advice-section mt-4" id="adviceSection">
+            <h3 class="advice-title">建議種植果品</h3>
+        </div>
+        <!-- 返回按鈕 -->
+        <button type="button" class="btn btn-primary" onclick="goBack()">返回</button>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p>&copy; 2023 農產品決策支援系統</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    // 返回按鈕
+function goBack() {
+    document.location.href="/";
+}
+
+// 解析 query string
+function parseQueryString() {
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+
+    // 獲取模擬數據
+    var suggestedCropsJson = urlParams.get('suggestedCrops');
+    var suggestedCrops = JSON.parse(suggestedCropsJson);
+
+    return { suggestedCrops };
+}
+
+// 在頁面加載完成後執行
+document.addEventListener('DOMContentLoaded', function () {
+    // 解析 query string
+    var { suggestedCrops } = parseQueryString();
+
+    // 更新建議種植果品部分
+    var adviceSection = document.getElementById('adviceSection');
+    if (adviceSection && suggestedCrops) {
+        var adviceHTML = '<h3 class="advice-title">建議種植果品</h3>';
+        // 只顯示前三名
+        for (var i = 0; i < Math.min(3, suggestedCrops.length); i++) {
+            adviceHTML += '<p>第' + (i + 1) + '名：' + suggestedCrops[i] + '</p>';
+        }
+        adviceSection.innerHTML = adviceHTML;
+    }
+});
+</script>
